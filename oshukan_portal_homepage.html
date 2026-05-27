@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --pink:#EE7E7E;--pink-lt:#F7BFBF;
+  --teal:#36ACBC;--teal-lt:#83CBEB;
+  --amber:#F1AB56;--amber-lt:#F4E58C;
+  --blue:#005792;--blue-lt:#4E95D9;
+  --black:#1A1A1A;--white:#fff;--bg:#FAFAF8;--muted:#888;
+  --radius:14px;--radius-sm:8px;
+}
+body{font-family:'M PLUS Rounded 1c',sans-serif;background:var(--bg);color:var(--black);font-size:14px}
+
+/* ── NAV ── */
+nav{background:var(--white);border-bottom:2px solid var(--black);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-logo{font-size:17px;font-weight:800;letter-spacing:-.5px;display:flex;align-items:center;gap:8px}
+.logo-dots{display:flex;gap:4px}
+.logo-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--black)}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:13px;font-weight:700;transition:color .15s}
+.nav-links a:hover{color:var(--black)}
+.nav-cta{background:var(--pink);color:var(--white);border:2px solid var(--black);border-radius:999px;padding:6px 16px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit}
+
+/* ── TICKER ── */
+.ticker{background:var(--amber-lt);border-top:2px solid var(--black);border-bottom:2px solid var(--black);padding:9px 0;overflow:hidden;white-space:nowrap}
+.ticker-inner{display:inline-block;animation:ticker 20s linear infinite}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{display:inline-block;margin-right:48px;font-size:12px;font-weight:700}
+.ticker-bullet{display:inline-block;width:6px;height:6px;background:var(--pink);border-radius:50%;margin-right:8px;vertical-align:middle}
+
+/* ── HERO ── */
+.hero{padding:48px 32px 36px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;max-width:1100px;margin:0 auto}
+.hero-left{}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--pink-lt);border:2px solid var(--black);border-radius:999px;padding:5px 16px;font-size:12px;font-weight:800;margin-bottom:16px}
+.hero-eyebrow-dot{width:7px;height:7px;background:var(--pink);border-radius:50%}
+.hero h1{font-size:38px;font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px}
+.hero h1 em{font-style:normal;color:var(--pink)}
+.hero-sub{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{padding:11px 22px;border-radius:999px;border:2px solid var(--black);font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;transition:transform .1s}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--pink);color:var(--white)}
+.btn-secondary{background:var(--white);color:var(--black)}
+.hero-right{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hero-stat{background:var(--white);border:2px solid var(--black);border-radius:var(--radius);padding:16px;text-align:center}
+.hero-stat-num{font-size:28px;font-weight:800;line-height:1}
+.hero-stat-label{font-size:11px;color:var(--muted);font-weight:700;margin-top:4px}
+.hero-stat.accent{background:var(--pink);color:var(--white)}
+.hero-stat.accent .hero-stat-label{color:rgba(255,255,255,.75)}
+
+/* ── SECTION ── */
+.section{padding:0 32px 40px;max-width:1100px;margin:0 auto}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.section-title{font-size:13px;font-weight:800;letter-spacing:.5px}
+.section-title-bar{display:inline-block;width:4px;height:14px;border-radius:2px;margin-right:8px;vertical-align:middle}
+.see-all{font-size:12px;color:var(--muted);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--muted);padding-bottom:1px}
+
+/* ── NEWS CARDS ── */
+.news-scroll{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.news-scroll::-webkit-scrollbar{display:none}
+.news-card{background:var(--white);border:2px solid var(--black);border-radius:var(--radius);padding:0;min-width:220px;flex-shrink:0;overflow:hidden;cursor:pointer;transition:transform .15s}
+.news-card:hover{transform:translateY(-3px)}
+.news-card-top{height:5px}
+.news-card-body{padding:14px}
+.news-tag{font-size:10px;font-weight:800;padding:2px 9px;border-radius:999px;border:1.5px solid currentColor;width:fit-content;margin-bottom:8px}
+.news-card h3{font-size:13px;font-weight:700;line-height:1.45;margin-bottom:6px}
+.news-meta{font-size:11px;color:var(--muted)}
+
+/* ── 3-COL FEATURE ── */
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.feature-card{background:var(--white);border:2px solid var(--black);border-radius:var(--radius);padding:18px;cursor:pointer;transition:transform .15s}
+.feature-card:hover{transform:translateY(-3px)}
+.feature-icon-wrap{width:40px;height:40px;border-radius:10px;border:2px solid var(--black);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
+.feature-card h3{font-size:14px;font-weight:800;margin-bottom:5px}
+.feature-card p{font-size:12px;color:var(--muted);line-height:1.55}
+.feature-arrow{margin-top:12px;font-size:12px;font-weight:800;color:var(--muted)}
+
+/* ── RANKING ── */
+.ranking-wrap{background:var(--white);border:2px solid var(--black);border-radius:var(--radius);overflow:hidden}
+.ranking-header{padding:14px 18px;border-bottom:2px solid var(--black);display:flex;justify-content:space-between;align-items:center}
+.ranking-header h3{font-size:14px;font-weight:800}
+.ranking-header span{font-size:11px;color:var(--muted);font-weight:700}
+.ranking-row{display:flex;align-items:center;gap:14px;padding:11px 18px;border-bottom:1px solid #f0f0ec}
+.ranking-row:last-child{border-bottom:none}
+.rank-n{font-size:16px;font-weight:800;min-width:22px;text-align:center}
+.rank-bar-col{flex:1}
+.rank-name{font-size:13px;font-weight:700;margin-bottom:4px}
+.rank-bar{height:6px;background:#f0f0ec;border-radius:999px;overflow:hidden}
+.rank-fill{height:100%;border-radius:999px}
+.rank-pct{font-size:11px;color:var(--muted);font-weight:700;min-width:32px;text-align:right}
+
+/* ── COLOR PALETTE STRIP ── */
+.palette-strip{display:flex;gap:0;border:2px solid var(--black);border-radius:var(--radius);overflow:hidden;height:44px;margin-bottom:40px}
+.palette-swatch{flex:1}
+
+/* ── PILLARS ── */
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pillar-card{border:2px solid var(--black);border-radius:var(--radius);padding:18px;cursor:pointer;transition:transform .15s}
+.pillar-card:hover{transform:translateY(-3px)}
+.pillar-badge{display:inline-block;font-size:11px;font-weight:800;padding:3px 12px;border-radius:999px;border:2px solid var(--black);margin-bottom:10px}
+.pillar-card h3{font-size:14px;font-weight:800;margin-bottom:6px}
+.pillar-card p{font-size:12px;line-height:1.55;opacity:.75}
+
+/* ── FOOTER ── */
+footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.footer-logo{font-size:14px;font-weight:800}
+.footer-sub{font-size:11px;opacity:.5;margin-top:3px}
+.footer-links{display:flex;gap:20px}
+.footer-links a{color:rgba(255,255,255,.6);font-size:12px;font-weight:700;text-decoration:none}
+
+@media(max-width:680px){
+  nav{padding:0 16px}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr;padding:28px 16px 24px;gap:20px}
+  .hero h1{font-size:26px}
+  .hero-right{grid-template-columns:repeat(2,1fr)}
+  .section{padding:0 16px 32px}
+  .feature-grid{grid-template-columns:1fr 1fr}
+  .pillars-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="logo-dots">
+      <div class="logo-dot" style="background:var(--pink)"></div>
+      <div class="logo-dot" style="background:var(--teal)"></div>
+      <div class="logo-dot" style="background:var(--amber)"></div>
+    </div>
+    Oshukan Portal
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">ニュース</a></li>
+    <li><a href="#">行事</a></li>
+    <li><a href="#">部活</a></li>
+    <li><a href="#">講演</a></li>
+    <li><a href="#">広報部</a></li>
+  </ul>
+  <button class="nav-cta">お知らせ登録</button>
+</nav>
+
+<div class="ticker">
+  <span class="ticker-inner">
+    <span class="ticker-item"><span class="ticker-bullet"></span>🎉 文化祭まであと22日！テーマは「Colorful」</span>
+    <span class="ticker-item"><span class="ticker-bullet"></span>📣 広報部1期生 始動しました</span>
+    <span class="ticker-item"><span class="ticker-bullet"></span>🏆 サッカー部 県大会ベスト8進出おめでとう！</span>
+    <span class="ticker-item"><span class="ticker-bullet"></span>📚 今週の講師リクエストアンケート受付中</span>
+    <span class="ticker-item"><span class="ticker-bullet"></span>🎉 文化祭まであと22日！テーマは「Colorful」</span>
+    <span class="ticker-item"><span class="ticker-bullet"></span>📣 広報部1期生 始動しました</span>
+    <span class="ticker-item"><span class="ticker-bullet"></span>🏆 サッカー部 県大会ベスト8進出おめでとう！</span>
+    <span class="ticker-item"><span class="ticker-bullet"></span>📚 今週の講師リクエストアンケート受付中</span>
+  </span>
+</div>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><div class="hero-eyebrow-dot"></div>生徒会広報部 1期生 運営</div>
+    <h1>桜修館の<em>いま</em>を、<br>もっと面白く。</h1>
+    <p class="hero-sub">「自由と自治」を掲げる桜修館のリアルを発信する、生徒のための情報ポータル。ニュース・行事・部活・講演をここで全部チェック。</p>
+    <div class="hero-btns">
+      <button class="btn btn-primary">最新ニュースを見る</button>
+      <button class="btn btn-secondary">行事カレンダー 📅</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat accent">
+      <div class="hero-stat-num">22</div>
+      <div class="hero-stat-label">文化祭まであと（日）</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num" style="color:var(--teal)">12</div>
+      <div class="hero-stat-label">今週の新着記事</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num" style="color:var(--amber)">38</div>
+      <div class="hero-stat-label">部活紹介掲載数</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num" style="color:var(--blue)">6</div>
+      <div class="hero-stat-label">講演アーカイブ</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head">
+    <div class="section-title"><span class="section-title-bar" style="background:var(--pink)"></span>最新ニュース</div>
+    <a href="#" class="see-all">すべて見る →</a>
+  </div>
+  <div class="news-scroll">
+    <div class="news-card">
+      <div class="news-card-top" style="background:var(--pink)"></div>
+      <div class="news-card-body">
+        <div class="news-tag" style="color:var(--pink)">行事</div>
+        <h3>文化祭テーマ「Colorful」決定！各クラスの出し物も発表</h3>
+        <div class="news-meta">2日前 · 生徒会</div>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-card-top" style="background:var(--teal)"></div>
+      <div class="news-card-body">
+        <div class="news-tag" style="color:var(--teal)">講演</div>
+        <h3>第1回講師リクエスト、集計結果を公開します</h3>
+        <div class="news-meta">3日前 · 広報部</div>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-card-top" style="background:var(--blue)"></div>
+      <div class="news-card-body">
+        <div class="news-tag" style="color:var(--blue)">部活</div>
+        <h3>サッカー部 県大会ベスト8！キャプテンに直撃インタビュー</h3>
+        <div class="news-meta">4日前 · 広報部</div>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-card-top" style="background:var(--amber)"></div>
+      <div class="news-card-body">
+        <div class="news-tag" style="color:var(--amber)">異能発掘</div>
+        <h3>在校生インタビュー：AIでオリジナル楽曲をつくる2年生</h3>
+        <div class="news-meta">5日前 · 広報部</div>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-card-top" style="background:var(--pink-lt)" style="background:var(--pink)"></div>
+      <div class="news-card-body">
+        <div class="news-tag" style="color:var(--teal)">自治</div>
+        <h3>自治会6月議会、主な議題と決定事項まとめ</h3>
+        <div class="news-meta">1週間前 · 広報部</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head">
+    <div class="section-title"><span class="section-title-bar" style="background:var(--teal)"></span>コンテンツ</div>
+  </div>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon-wrap" style="background:var(--pink-lt)">🏫</div>
+      <h3>部活紹介</h3>
+      <p>先輩の本音レビュー付き。雰囲気・きつさ・楽しさをリアルに掲載。</p>
+      <div class="feature-arrow">くわしく見る →</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon-wrap" style="background:var(--teal-lt)">🎤</div>
+      <h3>講演アーカイブ</h3>
+      <p>招致講師の「一番熱い一言」を動画でアーカイブ。いつでも見返せる。</p>
+      <div class="feature-arrow">動画を見る →</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon-wrap" style="background:var(--amber-lt)">✨</div>
+      <h3>異能発掘インタビュー</h3>
+      <p>学内の隠れた才能に光を当てる連載。「この学校にはすごい奴がいる」。</p>
+      <div class="feature-arrow">読んでみる →</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon-wrap" style="background:#E6F1FB">📅</div>
+      <h3>行事カレンダー</h3>
+      <p>テスト・文化祭・体育祭・部活の予定を一覧で。見逃しゼロへ。</p>
+      <div class="feature-arrow">カレンダーを見る →</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon-wrap" style="background:var(--pink-lt)">🗳️</div>
+      <h3>自治会ダイジェスト</h3>
+      <p>議会の動きを30秒で読めるかたちに。自治の当事者になろう。</p>
+      <div class="feature-arrow">今月のまとめ →</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon-wrap" style="background:var(--teal-lt)">🛠️</div>
+      <h3>スキルシェア</h3>
+      <p>AI活用・iPad術・動画編集。広報部から全校へ還元するノウハウ集。</p>
+      <div class="feature-arrow">スキルを学ぶ →</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head">
+    <div class="section-title"><span class="section-title-bar" style="background:var(--amber)"></span>今週の給食ランキング</div>
+    <a href="#" class="see-all">投票する →</a>
+  </div>
+  <div class="ranking-wrap">
+    <div class="ranking-header"><h3>人気メニュー Top 3</h3><span>今週集計 · 234票</span></div>
+    <div class="ranking-row">
+      <div class="rank-n" style="color:#FFB800">1</div>
+      <div class="rank-bar-col">
+        <div class="rank-name">カレーライス</div>
+        <div class="rank-bar"><div class="rank-fill" style="width:88%;background:var(--pink)"></div></div>
+      </div>
+      <div class="rank-pct">88%</div>
+    </div>
+    <div class="ranking-row">
+      <div class="rank-n" style="color:#A0A0A0">2</div>
+      <div class="rank-bar-col">
+        <div class="rank-name">から揚げ定食</div>
+        <div class="rank-bar"><div class="rank-fill" style="width:71%;background:var(--teal)"></div></div>
+      </div>
+      <div class="rank-pct">71%</div>
+    </div>
+    <div class="ranking-row">
+      <div class="rank-n" style="color:#CD7C3B">3</div>
+      <div class="rank-bar-col">
+        <div class="rank-name">ラーメン</div>
+        <div class="rank-bar"><div class="rank-fill" style="width:58%;background:var(--amber)"></div></div>
+      </div>
+      <div class="rank-pct">58%</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head">
+    <div class="section-title"><span class="section-title-bar" style="background:var(--blue)"></span>広報部の3本柱</div>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card" style="background:var(--pink-lt)">
+      <span class="pillar-badge" style="background:var(--pink);color:#fff">① プロデュース</span>
+      <h3>「知」を呼び込む</h3>
+      <p>生徒リサーチで「今一番会いたい人」を招致。講演の名言をショート動画でアーカイブ配信。卒業生・プロとゆるく話せる場を創出する。</p>
+    </div>
+    <div class="pillar-card" style="background:var(--teal-lt)">
+      <span class="pillar-badge" style="background:var(--teal);color:#fff">② 発信</span>
+      <h3>「学校の正体」を可視化</h3>
+      <p>日常・自治の議論・葛藤をショート動画でリアルに発信。隠れた才能を発掘するインタビュー記事でポータルを盛り上げる。</p>
+    </div>
+    <div class="pillar-card" style="background:var(--amber-lt)">
+      <span class="pillar-badge" style="background:var(--amber);color:#fff">③ 教育・支援</span>
+      <h3>学校生活をアップデート</h3>
+      <p>AI活用術・iPad術・動画編集ワークショップを広報部から全校へ還元。スキルシェアで生活の質を上げる。</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">Oshukan Portal</div>
+    <div class="footer-sub">桜修館中等教育学校 生徒会広報部 運営</div>
+  </div>
+  <div class="footer-links">
+    <a href="#">ニュース</a>
+    <a href="#">行事</a>
+    <a href="#">部活</a>
+    <a href="#">広報部について</a>
+  </div>
+</footer>
+
+</body>
+</html>
