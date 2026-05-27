@@ -141,21 +141,29 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-stat accent">
-　　　<div class="hero-stat-num" id="days-left">--</div>      <div class="hero-stat-label">文化祭まであと（日）</div>
+    <div class="hero-stat-card">
+    　<div class="hero-stat-num" id="festival-days">--</div>
+   　 <div class="hero-stat-label" id="festival-label">記念祭まであと（日）</div>
     </div>
+　　<div id="festival-special-area" style="display: none; margin-top: 20px; padding: 20px; background: var(--pink-lt); border: 3px solid var(--pink); border-radius: var(--radius); text-align: center;">
+   　 <h2 style="color: var(--pink); margin-bottom: 10px;">✨ 記念祭 特設サイト公開中！ ✨</h2>
+   　 <p>企画一覧やタイムスケジュールはこちらからチェック！</p>
+   　 <a href="https://example.com" class="btn-primary" style="text-decoration: none; margin-top: 10px;">特設サイトへ行く 🚀</a>
+    /*https://example.comを記念祭特設サイトのURLに変えておく*/
+　　</div>
     <div class="hero-stat">
-      <div class="hero-stat-num" style="color:var(--teal)">12</div>
+　　　<div class="hero-stat-num" id="news-count" style="color:var(--teal)">--</div>      
       <div class="hero-stat-label">今週の新着記事</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-num" style="color:var(--amber)">38</div>
+      <div class="hero-stat-num" id="club-count" style="color:var(--amber)">--</div>
       <div class="hero-stat-label">部活紹介掲載数</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-num" style="color:var(--blue)">6</div>
+      <div class="hero-stat-num" id="talk-count" id="talk-count" style="color:var(--blue)">--</div>
       <div class="hero-stat-label">講演アーカイブ</div>
     </div>
+    
   </div>
 </div>
 
@@ -352,7 +360,57 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
 
         // ページが読み込まれたら実行
         window.onload = updateStats;
-    </script>
-</body>
-</html>
+</script>
+<script>
+    function updateFestivalStatus() {
+        const today = new Date();
+        // テスト用：今日の日付を固定したい場合はここを書き換えて確認できます
+        // const today = new Date('2026-09-05'); 
+
+        const f1 = new Date('2026-09-05'); // 1日目
+        const f2 = new Date('2026-09-06'); // 2日目
+        
+        const daysElement = document.getElementById('festival-days');
+        const labelElement = document.getElementById('festival-label');
+        const specialArea = document.getElementById('festival-special-area');
+
+        // 時間を 00:00:00 に揃えて日付の差だけを計算
+        const todayReset = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const f1Reset = new Date(f1.getFullYear(), f1.getMonth(), f1.getDate());
+        
+        const diff = f1Reset - todayReset;
+        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+        if (todayReset.getTime() === f1Reset.getTime()) {
+            // 記念祭 1日目
+            daysElement.innerText = "1日目";
+            labelElement.innerText = "記念祭 本日開催！";
+            specialArea.style.display = "block"; // 特設サイトへの案内を表示
+        } else if (todayReset.getTime() === f2.getTime()) {
+            // 記念祭 2日目
+            daysElement.innerText = "2日目";
+            labelElement.innerText = "記念祭 最終日！";
+            specialArea.style.display = "block";
+        } else if (days > 0) {
+            // 開催前（カウントダウン）
+            daysElement.innerText = days;
+            labelElement.innerText = "記念祭まであと（日）";
+        } else {
+            // 終了後
+            daysElement.innerText = "終";
+            labelElement.innerText = "記念祭は終了しました";
+        }
+    }
+// 1. ニュースカードの数を数えて「新着記事」に入れる
+    const newsCount = document.querySelectorAll('.news-card').length;
+    document.getElementById('news-count').innerText = newsCount;
+
+    // 2. コンテンツエリアのカードから部活紹介などを探す
+    // ※今はダミー数字でもOKですが、将来的に自動化するならここを使います
+    document.getElementById('club-count').innerText = "38"; // ひとまず手動値
+    document.getElementById('talk-count').innerText = "6";  // ひとまず手動値
+  
+    // 実行
+    updateFestivalStatus();
+</script>
 </html>
