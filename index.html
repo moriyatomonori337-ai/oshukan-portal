@@ -374,12 +374,12 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
 </script>
 <script>
     function updateFestivalStatus() {
-        const today = new Date('2026-05-27');
+        const today = new Date();
         // テスト用：今日の日付を固定したい場合はここを書き換えて確認できます
         // const today = new Date('2026-09-05'); 
 
-        const f1 = new Date('2026-09-05'); // 1日目
-        const f2 = new Date('2026-09-06'); // 2日目
+        const f1 = new Date('2026-05-27'); // 1日目
+        const f2 = new Date('2026-05-28'); // 2日目
         
         const daysElement = document.getElementById('festival-days');
         const labelElement = document.getElementById('festival-label');
