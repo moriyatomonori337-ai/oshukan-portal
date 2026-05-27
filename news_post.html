@@ -1,38 +1,157 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>記事詳細 | Oshukan Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
-    </head>
+    <style>
+        :root {
+            --pink: #ff6b9d; --pink-lt: #fff0f5;
+            --black: #2d2d2d; --muted: #717171;
+            --white: #ffffff; --bg: #f9f9f7;
+        }
+        body {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            background-color: var(--bg);
+            color: var(--black);
+            margin: 0; padding: 0;
+            line-height: 1.8;
+        }
+
+        /* ヘッダーデザイン（一覧ページを再現） */
+        header.site-header {
+            background: var(--white);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+        .logo { font-size: 22px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+        .logo-dots { display: flex; gap: 5px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        
+        /* 記事コンテンツ */
+        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; min-height: 70vh; }
+        
+        .back-btn {
+            display: inline-block; text-decoration: none; color: var(--black);
+            font-weight: 800; font-size: 14px; margin-bottom: 25px;
+            padding: 8px 16px; border: 2px solid var(--black); border-radius: 99px;
+            transition: 0.2s; background: var(--white);
+        }
+        .back-btn:hover { background: var(--black); color: var(--white); }
+
+        /* 記事カード（一覧ページのカードデザインを応用） */
+        article.post-card {
+            background: var(--white);
+            border: 3px solid var(--black);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.05);
+        }
+        .post-hero {
+            background: var(--pink-lt);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            border-bottom: 3px solid var(--black);
+        }
+        .post-body { padding: 40px; }
+        .post-tag {
+            display: inline-block; padding: 5px 15px; border-radius: 99px;
+            background: var(--pink-lt); color: var(--pink);
+            font-size: 13px; font-weight: 800; margin-bottom: 20px;
+            border: 1px solid var(--pink);
+        }
+        .post-title { font-size: 32px; font-weight: 800; margin: 0 0 20px 0; line-height: 1.4; }
+        .post-meta { display: flex; gap: 20px; color: var(--muted); font-size: 15px; font-weight: 700; margin-bottom: 30px; }
+        
+        .post-content {
+            font-size: 17px;
+            white-space: pre-wrap; /* 改行を有効にする */
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+        }
+
+        /* フッター */
+        footer {
+            background: var(--black); color: var(--white);
+            padding: 40px; margin-top: 60px;
+        }
+    </style>
+</head>
 <body>
-    <article class="post">
-        <h1 id="postTitle">読み込み中...</h1>
-        <div id="postMeta"><span id="postDate"></span> | <span id="postAuthor"></span></div>
-        <hr>
-        <div id="postContent"></div> </article>
 
-    <script>
-        async function loadArticle() {
-            // URLから「どの記事か」を受け取る (例: news_post.html?id=0)
-            const params = new URLSearchParams(window.location.search);
-            const id = params.get('id');
+<header class="site-header">
+    <div class="logo">
+        <div class="logo-dots">
+            <div class="dot" style="background:#ff6b6b"></div>
+            <div class="dot" style="background:#4ecdc4"></div>
+            <div class="dot" style="background:#ffbe0b"></div>
+        </div>
+        Oshukan Portal
+    </div>
+</header>
 
-            const response = await fetch('news_data.xlsx');
-            const arrayBuffer = await response.arrayBuffer();
-            const data = new Uint8Array(arrayBuffer);
-            const workbook = XLSX.read(data, { type: 'array' });
-            const sheet = workbook.Sheets[workbook.SheetNames[0]];
-            const newsData = XLSX.utils.sheet_to_json(sheet);
+<div class="container">
+    <a href="oshukan_news_list.html" class="back-btn">← 記事一覧に戻る</a>
+    
+    <article class="post-card" id="postMain">
+        <div class="post-hero" id="postEmoji">✨</div>
+        
+        <div class="post-body">
+            <div id="postTag" class="post-tag">読み込み中...</div>
+            <h1 id="postTitle" class="post-title">読み込み中...</h1>
+            
+            <div class="post-meta">
+                <span id="postDate">----/--/--</span>
+                <span id="postAuthor">広報部</span>
+            </div>
 
-            const article = newsData[id]; // エクセルの指定した行のデータを取得
+            <div id="postContent" class="post-content">
+                記事を読み込んでいます。少々お待ちください...
+            </div>
+        </div>
+    </article>
+</div>
 
+<footer>
+    <div style="font-weight:800; margin-bottom:10px;">Oshukan Portal</div>
+    <div style="font-size:12px; opacity:0.7;">桜修館中等教育学校 生徒会広報部 運営</div>
+</footer>
+
+<script>
+    async function loadArticle() {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        try {
+            const res = await fetch('news_data.xlsx');
+            const ab = await res.arrayBuffer();
+            const wb = XLSX.read(new Uint8Array(ab), {type:'array'});
+            const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+            
+            const article = data[id];
             if (article) {
                 document.getElementById('postTitle').innerText = article.title;
                 document.getElementById('postDate').innerText = article.date;
-                document.getElementById('postAuthor').innerText = article.author;
+                document.getElementById('postAuthor').innerText = `執筆：${article.author || '広報部'}`;
+                document.getElementById('postEmoji').innerText = article.emoji || '✨';
+                document.getElementById('postTag').innerText = article.tag || 'ニュース';
                 document.getElementById('postContent').innerText = article.content;
+                document.title = `${article.title} | Oshukan Portal`;
             }
+        } catch (e) {
+            document.getElementById('postContent').innerText = "エラー：記事の読み込みに失敗しました。";
         }
-        loadArticle();
-    </script>
+    }
+    loadArticle();
+</script>
+
 </body>
 </html>
