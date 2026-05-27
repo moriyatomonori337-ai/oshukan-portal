@@ -136,46 +136,39 @@ const TAG_COLORS={
 };
 const TAG_ICONS={'行事':'🎉','講演':'🎤','異能発掘':'✨','部活':'🏅','自治':'🗳️','スキル':'🛠️'};
 
-// --- ここからエクセル読み込み処理 ---
 let newsData = []; // エクセルのデータを入れる箱
+let currentTag = 'すべて';
+let currentSort = 'new';
+let currentSearch = '';
 
+// エクセル読み込み処理
 async function fetchNewsFromExcel() {
   try {
-    const response = await fetch('news_data.xlsx'); // 保存したエクセルファイル名
+    const response = await fetch('news_data.xlsx'); 
     const arrayBuffer = await response.arrayBuffer();
     const data = new Uint8Array(arrayBuffer);
     const workbook = XLSX.read(data, { type: 'array' });
     const sheet = workbook.Sheets[workbook.SheetNames[0]];
     
-    // エクセルのデータを読み込む
-    newsData = XLSX.utils.sheet_to_json(sheet);
+    // エクセルの全データを読み込む
+    // 行番号(id)を保持するために、indexを付けて保存します
+    const rawData = XLSX.utils.sheet_to_json(sheet);
+    newsData = rawData.map((item, index) => ({ ...item, excelRowId: index }));
     
-    // 読み込みが終わったら画面に表示
     render(); 
   } catch (e) {
     console.error("エクセルが読み込めませんでした:", e);
-    // エラーが出た時のために空の配列を入れておく
-    newsData = [];
-    render();
+    grid.innerHTML = `<p>エクセルファイルが見つかりません。news_data.xlsxをアップロードしてください。</p>`;
   }
 }
 
-// ページを開いた時にエクセルを読みに行く
-fetchNewsFromExcel();
-// --- ここまで ---
-
-let currentTag = 'すべて';
-let currentSort = 'new';
-let currentSearch = '';
-
 function fmt(d) {
   const dt = new Date(d);
-  if(isNaN(dt)) return d; // 日付じゃない文字が入ってた時の保険
+  if(isNaN(dt)) return d; 
   return `${dt.getMonth() + 1}月${dt.getDate()}日`;
 }
 
 function render() {
-  // ARTICLES の代わりに newsData を使う
   let list = [...newsData];
   
   if (currentTag !== 'すべて') list = list.filter(a => a.tag === currentTag);
@@ -188,74 +181,58 @@ function render() {
 
   const grid = document.getElementById('grid');
   if (!list.length) {
-    grid.innerHTML = `<div class="empty" style="grid-column:1/-1"><p>記事が見つかりませんでした</p><small>エクセルに記事が入っているか確認してください</small></div>`;
+    grid.innerHTML = `<div class="empty" style="grid-column:1/-1"><p>記事が見つかりませんでした</p></div>`;
     return;
   }
 
-let currentTag='すべて';
-let currentSort='new';
-let currentSearch='';
-
-function fmt(d){const dt=new Date(d);return`${dt.getMonth()+1}月${dt.getDate()}日`}
-
-function render(){
-  let list=[...ARTICLES];
-  if(currentTag!=='すべて') list=list.filter(a=>a.tag===currentTag);
-  if(currentSearch) list=list.filter(a=>a.title.includes(currentSearch)||a.tag.includes(currentSearch));
-  if(currentSort==='old') list.sort((a,b)=>a.date.localeCompare(b.date));
-  else list.sort((a,b)=>b.date.localeCompare(a.date));
-
-  document.getElementById('resultInfo').textContent=`${list.length}件の記事`;
-
-  const grid=document.getElementById('grid');
-  if(!list.length){
-    grid.innerHTML=`<div class="empty" style="grid-column:1/-1"><p>記事が見つかりませんでした</p><small>別のキーワードやタグで試してみてください</small></div>`;
-    return;
-  }
-
-  grid.innerHTML=list.map((a,i)=>{
-    const c=TAG_COLORS[a.tag]||{color:'var(--muted)',bg:'#f0f0ec'};
-    const featured=i===0&&currentTag==='すべて'&&!currentSearch;
-    return`<div class="news-card${featured?' featured':''}">
-      ${featured?`<div class="card-img-placeholder" style="background:${c.bg}">${a.emoji}</div>`:''}
-      <div class="card-accent" style="background:${c.color}"></div>
-      <div class="card-body">
-        <div class="card-tag" style="color:${c.color}">${TAG_ICONS[a.tag]||''} ${a.tag}</div>
-        <div class="card-title">${a.title}</div>
-        <div class="card-meta">
-          <span class="card-author">${a.author}</span>
-          <span class="card-dot"></span>
-          <span>${fmt(a.date)}</span>
+  grid.innerHTML = list.map((a, i) => {
+    const c = TAG_COLORS[a.tag] || {color:'var(--muted)', bg:'#f0f0ec'};
+    const featured = i === 0 && currentTag === 'すべて' && !currentSearch;
+    
+    // ここが重要！リンク先を news_post.html?id=行番号 にしています
+    return `
+      <a href="news_post.html?id=${a.excelRowId}" class="news-card${featured ? ' featured' : ''}" style="text-decoration:none; color:inherit;">
+        ${featured ? `<div class="card-img-placeholder" style="background:${c.bg}">${a.emoji || '✨'}</div>` : ''}
+        <div class="card-accent" style="background:${c.color}"></div>
+        <div class="card-body">
+          <div class="card-tag" style="color:${c.color}">${TAG_ICONS[a.tag] || ''} ${a.tag}</div>
+          <div class="card-title">${a.title}</div>
+          <div class="card-meta">
+            <span class="card-author">${a.author || '広報部'}</span>
+            <span class="card-dot"></span>
+            <span>${fmt(a.date)}</span>
+          </div>
         </div>
-      </div>
-    </div>`;
+      </a>`;
   }).join('');
 }
 
-document.getElementById('tagRow').addEventListener('click',e=>{
-  const btn=e.target.closest('.tag-btn');
-  if(!btn) return;
-  document.querySelectorAll('.tag-btn').forEach(b=>b.classList.remove('active'));
+// イベントリスナー類
+document.getElementById('tagRow').addEventListener('click', e => {
+  const btn = e.target.closest('.tag-btn');
+  if (!btn) return;
+  document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  currentTag=btn.dataset.tag;
+  currentTag = btn.dataset.tag;
   render();
 });
 
-document.querySelectorAll('.sort-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
+document.querySelectorAll('.sort-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    currentSort=btn.dataset.sort;
+    currentSort = btn.dataset.sort;
     render();
   });
 });
 
-document.getElementById('search').addEventListener('input',e=>{
-  currentSearch=e.target.value.trim();
+document.getElementById('search').addEventListener('input', e => {
+  currentSearch = e.target.value.trim();
   render();
 });
 
-render();
+// 最初にエクセルを読み込む
+fetchNewsFromExcel();
 </script>
 </body>
 </html>
