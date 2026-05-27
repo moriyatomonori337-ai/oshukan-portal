@@ -37,14 +37,21 @@
 
 /* ── SECTION ── */
 .section{padding:0 32px 40px;max-width:1100px;margin:0 auto}
+/* 横スクロールをやめて、3列のグリッドにする */
 .news-scroll {
-    display: grid; /* 横一列ではなくグリッドにする */
+    display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3列に並べる */
-    gap: 16px; /* 隙間を少し広げると見やすい */
-    overflow-x: visible; /* 横スクロールをやめる */
+    gap: 16px; /* カード同士の隙間 */
+    margin-bottom: 24px;
 }
 
-/* スマホの時は1列にする（おまけ） */
+/* カードの横幅制限を解除する */
+.news-card {
+    min-width: 0 !important; /* 横スクロール用の制限を消す */
+    width: 100%;
+}
+
+/* スマホで見るときは1列にする（これ大事！） */
 @media (max-width: 768px) {
     .news-scroll {
         grid-template-columns: 1fr;
