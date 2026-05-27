@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    </head>
+<body>
+    <article class="post">
+        <h1 id="postTitle">読み込み中...</h1>
+        <div id="postMeta"><span id="postDate"></span> | <span id="postAuthor"></span></div>
+        <hr>
+        <div id="postContent"></div> </article>
+
+    <script>
+        async function loadArticle() {
+            // URLから「どの記事か」を受け取る (例: news_post.html?id=0)
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            const response = await fetch('news_data.xlsx');
+            const arrayBuffer = await response.arrayBuffer();
+            const data = new Uint8Array(arrayBuffer);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheet = workbook.Sheets[workbook.SheetNames[0]];
+            const newsData = XLSX.utils.sheet_to_json(sheet);
+
+            const article = newsData[id]; // エクセルの指定した行のデータを取得
+
+            if (article) {
+                document.getElementById('postTitle').innerText = article.title;
+                document.getElementById('postDate').innerText = article.date;
+                document.getElementById('postAuthor').innerText = article.author;
+                document.getElementById('postContent').innerText = article.content;
+            }
+        }
+        loadArticle();
+    </script>
+</body>
+</html>
