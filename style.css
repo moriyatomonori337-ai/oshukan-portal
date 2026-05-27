@@ -19,3 +19,27 @@ nav{background:var(--white);border-bottom:2px solid var(--black);padding:0 32px;
 .nav-cta{background:var(--pink);color:var(--white);border:2px solid var(--black);border-radius:999px;padding:6px 16px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit}
 
 .wrap{max-width:1100px;margin:0 auto;padding:0 32px}
+/* 全ページ共通：フッターを画面最下部に固定する設定 */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* メインコンテンツを囲むクラス。
+   これを付けた要素が、画面の余ったスペースをすべて埋めてくれます */
+.wrapper {
+    flex: 1;
+}
+
+footer {
+    background: #2d2d2d; /* 変数を使っているなら var(--black) に変更 */
+    color: #ffffff;
+    padding: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
