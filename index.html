@@ -140,31 +140,34 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
     </a>
     </div>
   </div>
-  <div class="hero-right">
+<div class="hero-right">
     <div class="hero-stat-card">
-    　<div class="hero-stat-num" id="festival-days">--</div>
-   　 <div class="hero-stat-label" id="festival-label">記念祭まであと（日）</div>
+        <div class="hero-stat-num" id="festival-days">--</div>
+        <div class="hero-stat-label" id="festival-label">記念祭まであと（日）</div>
     </div>
-　　<div id="festival-special-area" style="display: none; margin-top: 20px; padding: 20px; background: var(--pink-lt); border: 3px solid var(--pink); border-radius: var(--radius); text-align: center;">
-   　 <h2 style="color: var(--pink); margin-bottom: 10px;">✨ 記念祭 特設サイト公開中！ ✨</h2>
-   　 <p>企画一覧やタイムスケジュールはこちらからチェック！</p>
-   　 <a href="https://example.com" class="btn-primary" style="text-decoration: none; margin-top: 10px;">特設サイトへ行く 🚀</a>
-    /*https://example.comを記念祭特設サイトのURLに変えておく*/
-　　</div>
-    <div class="hero-stat">
-   　 <div class="hero-stat-num" id="news-count" style="color:var(--teal)">--</div>
-   　 <div class="hero-stat-label">今週の新着記事</div>
-　　</div>
 
-　　<div class="hero-stat">
-   　 <div class="hero-stat-num" id="club-count" style="color:var(--amber)">--</div>
-   　 <div class="hero-stat-label">部活紹介掲載数</div>
-　　</div>
+    <div class="hero-stats-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+        <div class="hero-stat" style="background: var(--white); border: 2px solid var(--black); border-radius: var(--radius); padding: 12px; text-align: center;">
+            <div class="hero-stat-num" id="news-count" style="color:var(--teal); font-size: 20px;">--</div>
+            <div class="hero-stat-label" style="font-size: 10px;">今週の新着記事</div>
+        </div>
 
-　　<div class="hero-stat">
-    　<div class="hero-stat-num" id="talk-count" style="color:var(--blue)">--</div>
-    　<div class="hero-stat-label">講演アーカイブ</div>
-　　</div>
+        <div class="hero-stat" style="background: var(--white); border: 2px solid var(--black); border-radius: var(--radius); padding: 12px; text-align: center;">
+            <div class="hero-stat-num" id="club-count" style="color:var(--amber); font-size: 20px;">--</div>
+            <div class="hero-stat-label" style="font-size: 10px;">部活紹介掲載数</div>
+        </div>
+
+        <div class="hero-stat" style="background: var(--white); border: 2px solid var(--black); border-radius: var(--radius); padding: 12px; text-align: center; grid-column: span 2;">
+            <div class="hero-stat-num" id="talk-count" style="color:var(--blue); font-size: 20px;">--</div>
+            <div class="hero-stat-label" style="font-size: 10px;">講演アーカイブ</div>
+        </div>
+    </div>
+
+    <div id="festival-special-area" style="display: none; margin-top: 10px; padding: 15px; background: var(--pink-lt); border: 2px solid var(--pink); border-radius: var(--radius); text-align: center;">
+        <h3 style="color: var(--pink); font-size: 14px; margin-bottom: 5px;">✨ 記念祭 特設サイト公開中！ ✨</h3>
+        <a href="https://example.com" class="btn-primary" style="text-decoration: none; font-size: 12px; padding: 5px 10px;">特設サイトへ 🚀</a>
+    </div>
+</div>
     
   </div>
 </div>
