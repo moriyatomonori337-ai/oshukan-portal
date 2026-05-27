@@ -140,28 +140,34 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
     </a>
     </div>
   </div>
-<div class="hero-right">
-    <div class="hero-stat-card">
-        <div class="hero-stat-num" id="festival-days">--</div>
-        <div class="hero-stat-label" id="festival-label">記念祭まであと（日）</div>
+<div class="hero-right" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; align-items: start;">
+    <div class="hero-stat" style="background: var(--pink); border: 2px solid var(--black); border-radius: var(--radius); padding: 16px; text-align: center; display: flex; flex-direction: column; justify-content: center; box-shadow: 4px 4px 0px var(--black);">
+        <div class="hero-stat-num" id="festival-days" style="color: var(--white); font-size: 36px; font-weight: 800; text-shadow: 2px 2px 0px rgba(0,0,0,0.2);">--</div>
+        <div class="hero-stat-label" id="festival-label" style="color: var(--white); font-size: 11px; font-weight: 700; margin-top: 4px;">記念祭まであと（日）</div>
     </div>
 
-    <div class="hero-stats-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
-        <div class="hero-stat" style="background: var(--white); border: 2px solid var(--black); border-radius: var(--radius); padding: 12px; text-align: center;">
-            <div class="hero-stat-num" id="news-count" style="color:var(--teal); font-size: 20px;">--</div>
-            <div class="hero-stat-label" style="font-size: 10px;">今週の新着記事</div>
+    <div style="display: grid; grid-template-rows: repeat(3, 1fr); gap: 10px;">
+        <div class="hero-stat" style="background: var(--white); border: 2px solid var(--black); border-radius: var(--radius); padding: 8px 12px; display: flex; align-items: center; justify-content: space-between;">
+            <div class="hero-stat-label" style="font-size: 10px; font-weight: 700;">新着記事</div>
+            <div class="hero-stat-num" id="news-count" style="color:var(--teal); font-size: 18px; font-weight: 800;">--</div>
         </div>
 
-        <div class="hero-stat" style="background: var(--white); border: 2px solid var(--black); border-radius: var(--radius); padding: 12px; text-align: center;">
-            <div class="hero-stat-num" id="club-count" style="color:var(--amber); font-size: 20px;">--</div>
-            <div class="hero-stat-label" style="font-size: 10px;">部活紹介掲載数</div>
+        <div class="hero-stat" style="background: var(--white); border: 2px solid var(--black); border-radius: var(--radius); padding: 8px 12px; display: flex; align-items: center; justify-content: space-between;">
+            <div class="hero-stat-label" style="font-size: 10px; font-weight: 700;">部活紹介</div>
+            <div class="hero-stat-num" id="club-count" style="color:var(--amber); font-size: 18px; font-weight: 800;">--</div>
         </div>
 
-        <div class="hero-stat" style="background: var(--white); border: 2px solid var(--black); border-radius: var(--radius); padding: 12px; text-align: center; grid-column: span 2;">
-            <div class="hero-stat-num" id="talk-count" style="color:var(--blue); font-size: 20px;">--</div>
-            <div class="hero-stat-label" style="font-size: 10px;">講演アーカイブ</div>
+        <div class="hero-stat" style="background: var(--white); border: 2px solid var(--black); border-radius: var(--radius); padding: 8px 12px; display: flex; align-items: center; justify-content: space-between;">
+            <div class="hero-stat-label" style="font-size: 10px; font-weight: 700;">講 演</div>
+            <div class="hero-stat-num" id="talk-count" style="color:var(--blue); font-size: 18px; font-weight: 800;">--</div>
         </div>
     </div>
+
+    <div id="festival-special-area" style="display: none; grid-column: span 2; margin-top: 5px; padding: 12px; background: var(--pink-lt); border: 2px solid var(--black); border-radius: var(--radius); text-align: center; box-shadow: 3px 3px 0px var(--black);">
+        <h3 style="color: var(--pink); font-size: 13px; margin-bottom: 5px; font-weight: 800;">✨ 記念祭 特設サイト公開中！ ✨</h3>
+        <a href="https://example.com" class="btn-primary" style="text-decoration: none; font-size: 11px; padding: 5px 12px; display: inline-block;">特設サイトへ 🚀</a>
+    </div>
+</div>
 
     <div id="festival-special-area" style="display: none; margin-top: 10px; padding: 15px; background: var(--pink-lt); border: 2px solid var(--pink); border-radius: var(--radius); text-align: center;">
         <h3 style="color: var(--pink); font-size: 14px; margin-bottom: 5px;">✨ 記念祭 特設サイト公開中！ ✨</h3>
