@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理者ダッシュボード | 桜修館広報部</title>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ff6b9d; --pink-lt: #fff0f5;
+            --teal: #4db6ac; --amber: #ffb300;
+            --blue: #42a5f5; --black: #2d2d2d;
+            --white: #ffffff; --gray: #f4f4f2;
+        }
+        body {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            background-color: var(--gray);
+            color: var(--black);
+            margin: 0; padding: 0;
+            display: none; /* パスワード認証まで非表示 */
+        }
+        .dashboard { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        header { margin-bottom: 30px; }
+        h1 { font-size: 28px; font-weight: 800; border-left: 8px solid var(--pink); padding-left: 15px; }
+        
+        /* タブ切り替え */
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab-btn {
+            padding: 12px 24px; border: 2px solid var(--black); border-radius: 12px 12px 0 0;
+            background: #e0e0dc; cursor: pointer; font-weight: 800; font-size: 14px;
+        }
+        .tab-btn.active { background: var(--white); border-bottom: none; position: relative; top: 2px; }
+
+        .tab-content {
+            display: none; background: var(--white); border: 2px solid var(--black);
+            border-radius: 0 12px 12px 12px; padding: 30px; box-shadow: 6px 6px 0 var(--black);
+        }
+        .tab-content.active { display: block; }
+
+        /* フォーム形式 */
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 800; margin-bottom: 8px; font-size: 14px; }
+        input, select, textarea {
+            width: 100%; padding: 12px; border: 2px solid var(--black); border-radius: 8px;
+            font-family: inherit; font-size: 15px; box-sizing: border-box;
+        }
+        textarea { height: 120px; }
+
+        .btn {
+            background: var(--pink); color: var(--white); border: 2px solid var(--black);
+            padding: 15px; border-radius: 10px; font-weight: 800; cursor: pointer; width: 100%;
+            font-size: 16px; margin-top: 10px; box-shadow: 0 4px 0 var(--black);
+        }
+        .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--black); }
+
+        /* 結果表示エリア */
+        #outputSection { margin-top: 30px; background: #fff9fb; border: 2px dashed var(--pink); padding: 20px; border-radius: 10px; display: none; }
+        .result-code {
+            background: #eee; padding: 15px; border-radius: 5px; font-family: monospace;
+            font-size: 13px; white-space: pre-wrap; word-break: break-all; margin-top: 10px;
+        }
+
+        /* リンク・メモタブ */
+        .link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .link-item {
+            padding: 20px; border: 2px solid var(--black); border-radius: 12px;
+            text-decoration: none; color: var(--black); font-weight: 800; text-align: center;
+            background: var(--white); transition: 0.2s;
+        }
+        .link-item:hover { background: var(--pink-lt); transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--black); }
+        .memo-list { line-height: 1.8; }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <header>
+        <h1>桜修館広報部 司令塔</h1>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('create')">✍️ 記事作成</button>
+        <button class="tab-btn" onclick="openTab('links')">🔗 運用リンク</button>
+        <button class="tab-btn" onclick="openTab('memo')">📝 部内メモ</button>
+    </div>
+
+    <div id="create" class="tab-content active">
+        <div class="form-group">
+            <label>タイトル</label>
+            <input type="text" id="title" placeholder="記事のタイトルを入力">
+        </div>
+        <div style="display:flex; gap:15px;">
+            <div class="form-group" style="flex:1;">
+                <label>タグ</label>
+                <select id="tag">
+                    <option value="行事">🎉 行事</option>
+                    <option value="講演">🎤 講演</option>
+                    <option value="部活">🏅 部活</option>
+                    <option value="異能発掘">✨ 異能発掘</option>
+                    <option value="自治">🗳️ 自治</option>
+                    <option value="スキル">🛠️ スキル</option>
+                </select>
+            </div>
+            <div class="form-group" style="flex:1;">
+                <label>絵文字</label>
+                <input type="text" id="emoji" placeholder="🎊">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>執筆者</label>
+            <input type="text" id="author" placeholder="広報部 〇〇">
+        </div>
+        <div class="form-group">
+            <label>本文</label>
+            <textarea id="content" placeholder="ここに本文を入力..."></textarea>
+        </div>
+        <button class="btn" onclick="generateRow()">エクセル用データを生成</button>
+
+        <div id="outputSection">
+            <label>✅ 生成完了！これをコピーしてエクセルの末尾に貼ってください</label>
+            <div id="result" class="result-code"></div>
+            <small style="color:var(--pink); font-weight:800;">※コピーしてエクセルのA列（date）に貼り付けると、自動で各セルに振り分けられます。</small>
+        </div>
+    </div>
+
+    <div id="links" class="tab-content">
+        <div class="link-grid">
+            <a href="https://github.com/" target="_blank" class="link-item">📂 GitHubリポジトリ</a>
+            <a href="#" target="_blank" class="link-item">☁️ 共有ドライブ</a>
+            <a href="https://www.oshukan-he.metro.tokyo.jp/" target="_blank" class="link-item">🏫 学校公式サイト</a>
+            <a href="oshukan_news_list.html" target="_blank" class="link-item">👀 サイトを表示</a>
+        </div>
+    </div>
+
+    <div id="memo" class="tab-content">
+        <div class="memo-list">
+            <h3>📌 投稿ルール</h3>
+            <ul>
+                <li>写真は共有ドライブの「HP用」から選ぶこと。</li>
+                <li>執筆後は必ず部長の校閲を受けること。</li>
+                <li>タグに迷ったら「行事」に設定。</li>
+            </ul>
+            <h3>🛠 ToDo</h3>
+            <p>・新入生歓迎会の特設ページ作成</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 1. 簡易パスワード認証
+    const PASS = "開けゴマ"; // ここを好きなパスワードに変えてね
+    const input = prompt("パスワードを入力してください");
+    if (input === PASS) {
+        document.body.style.display = "block";
+    } else {
+        alert("認証に失敗しました");
+    }
+
+    // 2. タブ切り替え機能
+    function openTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    // 3. データ生成機能
+    function generateRow() {
+        const title = document.getElementById('title').value;
+        const tag = document.getElementById('tag').value;
+        const emoji = document.getElementById('emoji').value || '✨';
+        const author = document.getElementById('author').value || '広報部';
+        const content = document.getElementById('content').value;
+        const date = new Date().toISOString().split('T')[0];
+
+        if(!title || !content) { alert("タイトルと本文を入れてね！"); return; }
+
+        // エクセルにそのまま貼れるタブ区切り形式
+        const rowData = `${date}\t${tag}\t${title}\t${author}\t${emoji}\t${content}`;
+        
+        document.getElementById('result').innerText = rowData;
+        document.getElementById('outputSection').style.display = 'block';
+
+        // 自動選択
+        const range = document.createRange();
+        range.selectNode(document.getElementById('result'));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+    }
+</script>
+
+</body>
+</html>
