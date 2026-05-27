@@ -10,7 +10,7 @@
 body{font-family:'M PLUS Rounded 1c',sans-serif;background:var(--bg);color:var(--black);font-size:14px}
 
 nav{background:var(--white);border-bottom:2px solid var(--black);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.nav-logo{font-size:17px;font-weight:800;letter-spacing:-.5px;display:flex;align-items:center;gap:8px}
+.nav-logo{font-size:24px;font-weight:800;letter-spacing:-.5px;display:flex;align-items:center;gap:8px}
 .logo-dots{display:flex;gap:4px}
 .logo-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--black)}
 .nav-links{display:flex;gap:24px;list-style:none}
