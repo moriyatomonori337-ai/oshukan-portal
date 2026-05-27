@@ -13,83 +13,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>記事詳細 | Oshukan Portal</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    
+    <style>
+        :root {
+            --pink: #ff6b9d; --pink-lt: #fff0f5;
+            --black: #2d2d2d; --muted: #717171;
+            --white: #ffffff; --bg: #f9f9f7;
+        }
+
+        /* フッター固定のための設定 */
+        html, body { height: 100%; margin: 0; }
+        body { display: flex; flex-direction: column; font-family: 'M PLUS Rounded 1c', sans-serif; background-color: var(--bg); color: var(--black); }
+        .wrapper { flex: 1; }
+
+        /* ヘッダー */
+        .site-header { background: var(--white); padding: 15px 40px; border-bottom: 2px solid var(--black); display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 20px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+        .dot-group { display: flex; gap: 5px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+        /* コンテンツエリア */
+        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        
+        .back-btn { display: inline-block; text-decoration: none; color: var(--black); font-weight: 800; font-size: 14px; margin-bottom: 25px; padding: 8px 16px; border: 2px solid var(--black); border-radius: 99px; background: var(--white); box-shadow: 3px 3px 0 var(--black); }
+        .back-btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--black); }
+
+        /* 記事カード */
+        .post-card { background: var(--white); border: 3px solid var(--black); border-radius: 24px; overflow: hidden; box-shadow: 8px 8px 0 rgba(0,0,0,0.1); }
+        .post-hero { background: var(--pink-lt); height: 180px; display: flex; align-items: center; justify-content: center; font-size: 70px; border-bottom: 3px solid var(--black); }
+        .post-body { padding: 40px; }
+        .post-tag { display: inline-block; padding: 4px 12px; border-radius: 99px; background: var(--pink); color: var(--white); font-size: 12px; font-weight: 800; margin-bottom: 15px; }
+        .post-title { font-size: 28px; font-weight: 800; margin: 0 0 15px 0; line-height: 1.4; }
+        .post-meta { display: flex; gap: 15px; color: var(--muted); font-size: 14px; margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .post-content { font-size: 16px; white-space: pre-wrap; line-height: 1.8; }
+
+        /* フッター */
+        footer { background: var(--black); color: var(--white); padding: 40px; text-align: left; }
+    </style>
 </head>
 <body>
-    <div class="wrapper">
-        <header class="site-header">
-            <div class="logo">
-                <div class="logo-dots">
-                    <div class="dot" style="background:#ff6b6b"></div>
-                    <div class="dot" style="background:#4ecdc4"></div>
-                    <div class="dot" style="background:#ffbe0b"></div>
-                </div>
-                Oshukan Portal
+
+<div class="wrapper">
+    <header class="site-header">
+        <div class="logo">
+            <div class="dot-group">
+                <div class="dot" style="background:#ff6b6b"></div>
+                <div class="dot" style="background:#4ecdc4"></div>
+                <div class="dot" style="background:#ffbe0b"></div>
             </div>
-        </header>
-
-        <main class="container">
-            <div style="margin-bottom: 20px;">
-                <a href="oshukan_news_list.html" class="btn-secondary" style="text-decoration:none;">← 戻る</a>
-            </div>
-
-            <article class="news-item-detail">
-                <div class="item-emoji-large" id="postEmoji">✨</div>
-                
-                <div class="item-content">
-                    <span id="postTag" class="category-tag">読み込み中...</span>
-                    <h1 id="postTitle" class="item-title-large">読み込み中...</h1>
-                    
-                    <div class="item-meta">
-                        <span id="postDate">----/--/--</span>
-                        <span id="postAuthor">執筆：広報部</span>
-                    </div>
-
-                    <hr class="separator">
-
-                    <div id="postContent" class="item-body-text">
-                        記事を読み込んでいます...
-                    </div>
-                </div>
-            </article>
-        </main>
-    </div>
-
-    <footer>
-        <div class="footer-content">
-            <p>Oshukan Portal</p>
-            <small>桜修館中等教育学校 生徒会広報部</small>
+            Oshukan Portal
         </div>
-    </footer>
+    </header>
 
-    <script>
-        // エクセル読み込みロジック（ここは今のままでOK）
-        async function loadArticle() {
-            const params = new URLSearchParams(window.location.search);
-            const id = params.get('id');
-            try {
-                const res = await fetch('news_data.xlsx');
-                const ab = await res.arrayBuffer();
-                const wb = XLSX.read(new Uint8Array(ab), {type:'array'});
-                const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
-                
-                const article = data[id];
-                if (article) {
-                    document.getElementById('postTitle').innerText = article.title;
-                    document.getElementById('postDate').innerText = article.date;
-                    document.getElementById('postAuthor').innerText = `執筆：${article.author || '広報部'}`;
-                    document.getElementById('postEmoji').innerText = article.emoji || '✨';
-                    document.getElementById('postTag').innerText = article.tag || 'ニュース';
-                    document.getElementById('postContent').innerText = article.content;
-                    document.title = `${article.title} | Oshukan Portal`;
-                }
-            } catch (e) {
-                console.error(e);
-                document.getElementById('postContent').innerText = "エラー：記事が見つかりませんでした。";
+    <div class="container">
+        <a href="oshukan_news_list.html" class="back-btn">← 戻る</a>
+        
+        <article class="post-card">
+            <div class="post-hero" id="postEmoji">✨</div>
+            <div class="post-body">
+                <div id="postTag" class="post-tag">ニュース</div>
+                <h1 id="postTitle" class="post-title">読み込み中...</h1>
+                <div class="post-meta">
+                    <span id="postDate">----/--/--</span>
+                    <span id="postAuthor">広報部</span>
+                </div>
+                <div id="postContent" class="post-content">記事を読み込んでいます...</div>
+            </div>
+        </article>
+    </div>
+</div>
+
+<footer>
+    <div style="font-weight:800; font-size:18px;">Oshukan Portal</div>
+    <div style="font-size:12px; opacity:0.8; margin-top:5px;">桜修館中等教育学校 生徒会広報部</div>
+</footer>
+
+<script>
+    async function load() {
+        const id = new URLSearchParams(window.location.search).get('id');
+        try {
+            const res = await fetch('news_data.xlsx');
+            const ab = await res.arrayBuffer();
+            const wb = XLSX.read(new Uint8Array(ab), {type:'array'});
+            const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+            const a = data[id];
+            if(a) {
+                document.getElementById('postTitle').innerText = a.title;
+                document.getElementById('postDate').innerText = a.date;
+                document.getElementById('postAuthor').innerText = "執筆：" + (a.author || "広報部");
+                document.getElementById('postEmoji').innerText = a.emoji || "✨";
+                document.getElementById('postTag').innerText = a.tag || "記事";
+                document.getElementById('postContent').innerText = a.content;
             }
-        }
-        loadArticle();
-    </script>
+        } catch(e) { console.error(e); }
+    }
+    load();
+</script>
 </body>
 </html>
