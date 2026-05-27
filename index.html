@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -424,5 +425,19 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
   
     // 実行
     updateFestivalStatus();
+async function loadNewsFromExcel() {
+    // 1. エクセルファイルを読み込む
+    const response = await fetch('news_data.xlsx');
+    const arrayBuffer = await response.arrayBuffer();
+    const data = new Uint8Array(arrayBuffer);
+    const workbook = XLSX.read(data, {type: 'array'});
+
+    // 2. 最初のシートのデータをJSON（扱いやすい形）にする
+    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+    const newsList = XLSX.utils.sheet_to_json(firstSheet);
+
+    // 3. 画面に表示する（今のデザインに合わせて流し込む）
+    renderNews(newsList);
+}
 </script>
 </html>
