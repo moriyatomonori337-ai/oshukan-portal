@@ -142,8 +142,7 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
   </div>
   <div class="hero-right">
     <div class="hero-stat accent">
-      <div class="hero-stat-num">22</div>
-      <div class="hero-stat-label">文化祭まであと（日）</div>
+　　　<div class="hero-stat-num" id="days-left">--</div>      <div class="hero-stat-label">文化祭まであと（日）</div>
     </div>
     <div class="hero-stat">
       <div class="hero-stat-num" style="color:var(--teal)">12</div>
@@ -328,4 +327,32 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
 </footer>
 
 </body>
+<script>
+        function updateStats() {
+            // ① 文化祭カウントダウン
+            const targetDate = new Date('2026-09-05'); // 文化祭の日付をここに
+            const today = new Date();
+            const diff = targetDate - today;
+            const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            
+            const daysElement = document.getElementById('days-left');
+            if (daysElement) {
+                daysElement.innerText = days > 0 ? days : 0;
+            }
+
+            // ② 記事数を自動で数える（ニュースカードの数を数える）
+            // .news-card のクラスがついた要素がいくつあるか数えます
+            const newsCount = document.querySelectorAll('.news-card').length;
+            // 「今週の新着記事」の数字の場所にも id="news-count" をつければ自動化できます！
+            const newsElement = document.getElementById('news-count');
+            if (newsElement) {
+                newsElement.innerText = newsCount;
+            }
+        }
+
+        // ページが読み込まれたら実行
+        window.onload = updateStats;
+    </script>
+</body>
+</html>
 </html>
