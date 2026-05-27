@@ -136,20 +136,61 @@ const TAG_COLORS={
 };
 const TAG_ICONS={'行事':'🎉','講演':'🎤','異能発掘':'✨','部活':'🏅','自治':'🗳️','スキル':'🛠️'};
 
-const ARTICLES=[
-  {id:1,tag:'行事',title:'記念祭テーマ「RPG」決定！各クラスの出し物を一挙公開',author:'記念祭幹部',date:'2026-05-24',featured:true,emoji:'🎊'},
-  {id:2,tag:'講演',title:'第1回講師リクエスト集計結果を発表。1位はあの起業家！',author:'広報部',date:'2026-05-23',featured:false,emoji:'🎤'},
-  {id:3,tag:'部活',title:'サッカー部 県大会ベスト8！キャプテンに直撃インタビュー',author:'広報部',date:'2026-05-22',featured:false,emoji:'⚽'},
-  {id:4,tag:'異能発掘',title:'AIでオリジナル楽曲をつくる2年生・田中さんに聞いてみた',author:'広報部',date:'2026-05-21',featured:false,emoji:'🎵'},
-  {id:5,tag:'自治',title:'6月自治会議会まとめ：校則改正案が提出されました',author:'自治会',date:'2026-05-20',featured:false,emoji:'📋'},
-  {id:6,tag:'スキル',title:'iPadノート術 完全ガイド｜広報部テック班が伝授します',author:'広報部',date:'2026-05-19',featured:false,emoji:'📱'},
-  {id:7,tag:'行事',title:'体育祭2026 競技種目・チーム分けが発表されました',author:'クラスマッチ幹部',date:'2026-05-18',featured:false,emoji:'🏃'},
-  {id:8,tag:'講演',title:'卒業生・山田さん（東大医学部）が語る「桜修館で得たもの」',author:'進路部・広報部',date:'2026-05-16',featured:false,emoji:'🎓'},
-  {id:9,tag:'異能発掘',title:'放課後に天体望遠鏡を自作していた3年生を発見した',author:'広報部',date:'2026-05-14',featured:false,emoji:'🔭'},
-  {id:10,tag:'部活',title:'合唱部が全国大会へ！練習密着レポート48時間',author:'広報部',date:'2026-05-12',featured:false,emoji:'🎶'},
-  {id:11,tag:'スキル',title:'ChatGPTで英作文の精度を爆上げする使い方【実例あり】',author:'広報部',date:'2026-05-10',featured:false,emoji:'🤖'},
-  {id:12,tag:'自治',title:'広報部1期生、始動しました。これからよろしくお願いします',author:'広報部',date:'2026-05-01',featured:false,emoji:'📣'},
-];
+// --- ここからエクセル読み込み処理 ---
+let newsData = []; // エクセルのデータを入れる箱
+
+async function fetchNewsFromExcel() {
+  try {
+    const response = await fetch('news_data.xlsx'); // 保存したエクセルファイル名
+    const arrayBuffer = await response.arrayBuffer();
+    const data = new Uint8Array(arrayBuffer);
+    const workbook = XLSX.read(data, { type: 'array' });
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    
+    // エクセルのデータを読み込む
+    newsData = XLSX.utils.sheet_to_json(sheet);
+    
+    // 読み込みが終わったら画面に表示
+    render(); 
+  } catch (e) {
+    console.error("エクセルが読み込めませんでした:", e);
+    // エラーが出た時のために空の配列を入れておく
+    newsData = [];
+    render();
+  }
+}
+
+// ページを開いた時にエクセルを読みに行く
+fetchNewsFromExcel();
+// --- ここまで ---
+
+let currentTag = 'すべて';
+let currentSort = 'new';
+let currentSearch = '';
+
+function fmt(d) {
+  const dt = new Date(d);
+  if(isNaN(dt)) return d; // 日付じゃない文字が入ってた時の保険
+  return `${dt.getMonth() + 1}月${dt.getDate()}日`;
+}
+
+function render() {
+  // ARTICLES の代わりに newsData を使う
+  let list = [...newsData];
+  
+  if (currentTag !== 'すべて') list = list.filter(a => a.tag === currentTag);
+  if (currentSearch) list = list.filter(a => a.title.includes(currentSearch) || (a.tag && a.tag.includes(currentSearch)));
+  
+  if (currentSort === 'old') list.sort((a, b) => String(a.date).localeCompare(String(b.date)));
+  else list.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+
+  document.getElementById('resultInfo').textContent = `${list.length}件の記事`;
+
+  const grid = document.getElementById('grid');
+  if (!list.length) {
+    grid.innerHTML = `<div class="empty" style="grid-column:1/-1"><p>記事が見つかりませんでした</p><small>エクセルに記事が入っているか確認してください</small></div>`;
+    return;
+  }
 
 let currentTag='すべて';
 let currentSort='new';
