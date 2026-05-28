@@ -54,6 +54,18 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
 }
 </style>
 </head>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('is-active');
+            navLinks.classList.toggle('active');
+        });
+    }
+});
+</script>
 <body>
 <div class="wrapper">
 <nav>
