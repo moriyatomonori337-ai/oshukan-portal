@@ -25,7 +25,7 @@ nav {
 }
 
 .nav-logo {
-    font-size: 16px; /* スマホでサイト名が入り切るよう少し小さめに */
+    font-size: 18px; /* スマホでサイト名が入り切るよう少し小さめに */
     font-weight: 700;
     letter-spacing: -.5px;
     display: flex;
