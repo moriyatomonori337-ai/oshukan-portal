@@ -105,6 +105,23 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
 }
 </style>
 </head>
+<script>
+  const menu = document.getElementById('mobile-menu');
+  const navList = document.querySelector('.nav-links');
+
+  menu.addEventListener('click', () => {
+    menu.classList.toggle('is-active');
+    navList.classList.toggle('active');
+  });
+
+  // メニュー以外をクリックしたら閉じる
+  document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target) && !navList.contains(e.target)) {
+      menu.classList.remove('is-active');
+      navList.classList.remove('active');
+    }
+  });
+</script>
 <body>
 <div class="wrapper">
 <nav>
