@@ -135,14 +135,20 @@ footer {
         margin: 0;
     }
 
+/* 78行目付近から差し替え */
     .nav-links a {
         font-size: 20px !important;
-        padding: 15px 0;
-        display: block;
+        padding: 10px 0;
+        display: inline-block; /* 下線を文字幅に合わせるため */
         color: var(--black);
-        border-bottom: 1px solid #eee;
+        border-bottom: 2px solid #eee; /* スマホではより薄い灰色 */
+        width: fit-content;
+        margin-bottom: 10px;
     }
 
+    .nav-links a.active {
+        border-bottom: 2px solid var(--pink) !important;
+    }
     /* ×印のアニメーション */
     .menu-toggle.is-active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .menu-toggle.is-active span:nth-child(2) { opacity: 0; }
