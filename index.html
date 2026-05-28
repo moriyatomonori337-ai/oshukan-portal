@@ -93,15 +93,26 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
 .footer-links{display:flex;gap:20px}
 .footer-links a{color:rgba(255,255,255,.6);font-size:12px;font-weight:700;text-decoration:none}
 
-@media(max-width:680px){
-  nav{padding:0 16px}
-  .nav-links{display:none}
-  .hero{grid-template-columns:1fr;padding:28px 16px 24px;gap:20px}
-  .hero h1{font-size:26px}
-  .hero-right{grid-template-columns:repeat(2,1fr)}
-  .section{padding:0 16px 32px}
-  .feature-grid{grid-template-columns:1fr 1fr}
-  .pillars-grid{grid-template-columns:1fr}
+@media(max-width:680px) {
+  /* --- ヒーローエリアのキャッチコピーを大きくする --- */
+  .hero h1 {
+    font-size: 36px !important; /* 今より一回り大きく（元の26pxからアップ） */
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -1px; /* 少し字間を詰めるとカッコよくなります */
+  }
+
+  /* サブテキスト（説明文）も読みやすく調整 */
+  .hero p {
+    font-size: 15px !important;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  /* ヒーローエリア全体の余白を広げて「ドーン」と見せる */
+  .hero {
+    padding: 48px 20px 32px !important; 
+  }
 }
 </style>
 </head>
