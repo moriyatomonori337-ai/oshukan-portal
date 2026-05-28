@@ -11,17 +11,19 @@ body{font-family:'M PLUS Rounded 1c',sans-serif;background:var(--bg);color:var(-
 
 nav{background:var(--white);border-bottom:2px solid var(--black);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 /* --- ナビゲーション全体の調整 --- */
-nav {
-    background: var(--white);
-    border-bottom: 2px solid var(--black);
-    padding: 0 16px; /* スマホで見やすいよう左右の余白を調整 */
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+/* 29行目付近から差し替え */
+.nav-links a { 
+    text-decoration: none; 
+    color: var(--black); 
+    font-size: 13px; 
+    font-weight: 700; 
+    border-bottom: 2px solid #ddd; /* 基本は薄い灰色 */
+    padding-bottom: 2px;
+    transition: 0.3s;
+}
+.nav-links a.active { 
+    color: var(--black) !important; 
+    border-bottom: 2px solid var(--pink) !important; /* アクティブ時はピンク */
 }
 
 .nav-logo {
