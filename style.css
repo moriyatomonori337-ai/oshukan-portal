@@ -43,3 +43,64 @@ footer {
     width: 100%;
     box-sizing: border-box;
 }
+/* --- スマホ用ハンバーガーメニューのスタイル --- */
+
+/* PCではハンバーガーボタンを隠す */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.menu-toggle span {
+    width: 28px;
+    height: 3px;
+    background: var(--black);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* スマホ画面（680px以下）の時の動き */
+@media (max-width: 680px) {
+    nav {
+        padding: 0 16px; /* 左右の余白を少し詰める */
+    }
+
+    .menu-toggle {
+        display: flex; /* ボタンを表示 */
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* 画面の外側に隠す */
+        width: 75%;
+        height: 100vh;
+        background: var(--white);
+        border-left: 3px solid var(--black);
+        flex-direction: column;
+        padding: 80px 32px;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1050;
+        gap: 32px; /* メニュー同士の間隔 */
+    }
+
+    /* メニューが開いた時 */
+    .nav-links.active {
+        right: 0;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    }
+
+    .nav-links a {
+        font-size: 20px !important; /* スマホで押しやすく大きく */
+        display: block;
+        width: 100%;
+    }
+
+    /* ハンバーガーアニメーション（×印にする場合） */
+    .menu-toggle.is-active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .menu-toggle.is-active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.is-active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
