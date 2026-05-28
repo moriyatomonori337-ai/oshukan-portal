@@ -122,6 +122,28 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
     }
   });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('is-active');
+            navLinks.classList.toggle('active');
+        });
+
+        // メニュー以外の場所をタップしたら閉じる
+        document.addEventListener('click', function(e) {
+            if (!navLinks.contains(e.target) && !menuBtn.contains(e.target)) {
+                menuBtn.classList.remove('is-active');
+                navLinks.classList.remove('active');
+            }
+        });
+    }
+});
+</script>
 <body>
 <div class="wrapper">
 <nav>
@@ -131,19 +153,25 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
       <div class="logo-dot" style="background:var(--teal)"></div>
       <div class="logo-dot" style="background:var(--amber)"></div>
     </div>
-    Oshukan Portal
+    <a href="index.html" style="text-decoration: none; color: inherit;">Oshukan Portal</a>
   </div>
-  <div class="menu-toggle" id="mobile-menu">
-  <span></span><span></span><span></span>
-　</div>
+
+  <div class="nav-right-group">
+    <a href="index.html" class="nav-cta">お知らせ登録</a>
+    <div class="menu-toggle" id="mobile-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
   <ul class="nav-links">
-      <li><a href="oshukan_news_list.html">ニュース</a></li>
-    <li><a href="oshukan_events_page.html">行事</a></li>
+    <li><a href="oshukan_news_list.html">ニュース</a></li>
+    <li><a href="oshukan_events_page.html" class="active">行事</a></li>
     <li><a href="oshukan_clubs_page.html">部活</a></li>
     <li><a href="oshukan_talks_page.html">講演</a></li>
     <li><a href="oshukan_about_page.html">広報部</a></li>
   </ul>
-<a href="index.html" class="nav-cta" style="text-decoration: none;">お知らせ登録</a>
 </nav>
 
 <div class="ticker">
