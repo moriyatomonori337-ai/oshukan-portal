@@ -37,45 +37,79 @@ main {
     width: 100%;
     box-sizing: border-box;
 }
-/* --- ナビゲーション全体の調整 --- */
+/* --- ナビゲーション全体の固定ルール --- */
 nav {
     background: var(--white);
     border-bottom: 2px solid var(--black);
-    padding: 0 24px !important; /* 少し余裕を持たせる */
+    padding: 0 24px !important;
     height: 64px !important;
     display: flex !important;
+    flex-direction: row !important;
     align-items: center !important;
-    justify-content: space-between !important; 
+    justify-content: space-between !important;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-sizing: border-box;
+    width: 100% !important;
+    max-width: none !important; /* ここは画面端まで広げる */
 }
 
-/* 左：ロゴエリア */
+/* 1. 左側：ロゴエリア（ドットと文字をセットにする） */
 .nav-logo {
     display: flex !important;
+    flex-direction: row !important;
     align-items: center !important;
-    gap: 10px !important;
+    gap: 12px !important; /* ドットと文字の間隔 */
     font-size: 20px !important;
     font-weight: 800;
-    flex-shrink: 0; /* ロゴが潰れないように */
+    flex-shrink: 0;
+    text-decoration: none;
+    color: var(--black);
 }
 
+/* ドットの並びを横に強制 */
 .logo-dots {
     display: flex !important;
+    flex-direction: row !important;
     gap: 4px !important;
+    align-items: center !important;
 }
 
-/* 中央：メニューリンク（ここを復活させる） */
+.logo-dot {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50%;
+    border: 1.5px solid var(--black);
+    flex-shrink: 0;
+    display: block !important; /* 消えないように強制 */
+}
+
+/* 2. 中央：メニュー（PCでのみ表示し、中央に寄せる） */
 .nav-links {
     display: flex !important;
     list-style: none !important;
-    gap: 24px !important; /* リンク同士の間隔 */
-    margin: 0 auto !important; /* これで中央に配置 */
+    gap: 24px !important;
+    margin: 0 auto !important; /* 左右をautoにすることで中央へ */
     padding: 0 !important;
 }
 
+/* 3. 右側：ボタングループ */
+.nav-right-group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    flex-shrink: 0;
+}
+
+/* スマホ版での表示切り替え */
+@media (max-width: 680px) {
+    .nav-links {
+        display: none !important; /* スマホでは一旦隠す */
+    }
+    .nav-links.active {
+        display: flex !important; /* ハンバーガーを押したら出す */
+    }
+}
 /* 右：お知らせボタンとハンバーガー */
 .nav-right-group {
     display: flex !important;
