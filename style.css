@@ -147,42 +147,54 @@ footer {
     .menu-toggle.is-active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 }
 @media (max-width: 680px) {
-  /* --- 既存のスマホ用設定の下に追加 --- */
-
+  /* --- フッターのスマホ専用修正 --- */
   footer {
-    padding: 40px 20px !important;
-    text-align: center; /* 中央寄せで綺麗に見せる */
+    padding: 40px 16px !important;
+    height: auto !important; /* 高さを固定せず中身に合わせる */
+    background: var(--black) !important;
+    display: block !important; /* flexを解除 */
   }
 
-  footer .footer-grid {
+  /* フッター内のグリッド（横並び設定）を解除して縦に並べる */
+  footer .footer-grid, 
+  footer .wrapper,
+  footer .container { 
     display: flex !important;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 16px !important;
+    width: 100% !important;
   }
 
-  /* ロゴ以外のフッターコラム（メニューなど）を非表示にする */
-  footer .footer-column:not(:first-child) {
+  /* 1番目のコラム（ロゴと運営名）以外をすべて消す */
+  footer .footer-column:not(:first-child),
+  footer .footer-nav,
+  footer .footer-links {
     display: none !important;
   }
 
-  /* サイト名の調整 */
+  /* サイト名のロゴを中央に */
   footer .footer-logo {
-    margin-bottom: 8px;
-    justify-content: center;
+    display: flex !important;
+    justify-content: center !important;
+    margin: 0 auto 8px !important;
+    font-size: 22px !important;
+    color: var(--white) !important;
   }
 
-  /* 運営組織名の調整 */
+  /* 「桜修館中等教育学校 自治会広報部 運営」の文字 */
   footer .footer-column p {
-    font-size: 12px;
-    line-height: 1.6;
-    opacity: 0.8;
+    display: block !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    margin: 0 !important;
+    max-width: 280px; /* 横長になりすぎないよう制限 */
   }
 
-  /* 下のコピーライト等のラインを消す、または調整 */
-  .footer-bottom {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+  /* コピーライトなどが含まれる下段も不要なら消す、またはシンプルに */
+  footer .footer-bottom {
+    display: none !important;
   }
 }
