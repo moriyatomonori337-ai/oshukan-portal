@@ -15,68 +15,7 @@
 <title>Oshukan Portal | 桜修館のいまを、もっと面白く</title>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<style>
-.ticker{background:var(--amber-lt); ... }
-.page-header{padding:36px 0 28px}
-.page-header h1{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
-.page-header p{font-size:13px;color:var(--muted);line-height:1.6}
 
-/* ── 三大行事ヒーロー ── */
-.sandai-section{margin-bottom:48px}
-.sandai-label{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
-.sankai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.sankai-card{border:2px solid var(--black);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform .15s}
-.sankai-card:hover{transform:translateY(-4px)}
-.sankai-top{height:120px;display:flex;align-items:center;justify-content:center;font-size:52px;position:relative}
-.sankai-badge{position:absolute;top:10px;left:10px;background:var(--white);border:2px solid var(--black);border-radius:999px;font-size:10px;font-weight:800;padding:2px 10px}
-.sankai-month{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.12);border-radius:999px;font-size:10px;font-weight:800;padding:2px 10px;color:var(--white)}
-.sankai-body{background:var(--white);padding:16px}
-.sankai-body h3{font-size:16px;font-weight:800;margin-bottom:3px}
-.sankai-body .sub{font-size:12px;color:var(--muted);margin-bottom:10px}
-.sankai-body p{font-size:12px;color:var(--black);line-height:1.6}
-.sankai-tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-.stag{font-size:10px;font-weight:800;padding:2px 9px;border-radius:999px;background:var(--bg);border:1.5px solid currentColor}
-
-/* ── 年間カレンダー ── */
-.cal-section{margin-bottom:48px}
-.cal-label{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
-.cal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.cal-month{background:var(--white);border:2px solid var(--black);border-radius:var(--radius);overflow:hidden}
-.cal-month-head{padding:10px 14px;border-bottom:2px solid var(--black);display:flex;align-items:center;justify-content:space-between}
-.cal-month-head span{font-size:13px;font-weight:800}
-.cal-month-head small{font-size:11px;color:var(--muted);font-weight:700}
-.cal-events{padding:8px 0}
-.cal-event{display:flex;align-items:center;gap:8px;padding:5px 14px}
-.cal-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.cal-event-name{font-size:12px;font-weight:700;flex:1}
-.cal-event-name.sankai{font-weight:800}
-.cal-event-badge{font-size:9px;font-weight:800;padding:1px 7px;border-radius:999px;color:var(--white)}
-
-/* ── カウントダウン ── */
-.countdown-section{margin-bottom:48px}
-.countdown-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.countdown-card{background:var(--white);border:2px solid var(--black);border-radius:var(--radius);padding:20px;text-align:center}
-.countdown-emoji{font-size:28px;margin-bottom:8px}
-.countdown-name{font-size:13px;font-weight:800;margin-bottom:12px}
-.countdown-nums{display:flex;gap:6px;justify-content:center;align-items:flex-end}
-.cd-block{text-align:center}
-.cd-num{font-size:28px;font-weight:800;line-height:1;display:block}
-.cd-unit{font-size:10px;color:var(--muted);font-weight:700}
-.cd-sep{font-size:20px;font-weight:800;color:var(--muted);padding-bottom:4px}
-.countdown-date{font-size:11px;color:var(--muted);margin-top:10px;font-weight:700}
-
-footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex;justify-content:space-between;align-items:center;margin-top:8px}
-.footer-logo{font-size:14px;font-weight:800}
-.footer-sub{font-size:11px;opacity:.5;margin-top:3px}
-
-@media(max-width:700px){
-  nav{padding:0 16px}.nav-links{display:none}
-  .wrap{padding:0 16px}
-  .sankai-grid{grid-template-columns:1fr}
-  .cal-grid{grid-template-columns:repeat(2,1fr)}
-  .countdown-grid{grid-template-columns:1fr}
-}
-</style>
 </head>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
