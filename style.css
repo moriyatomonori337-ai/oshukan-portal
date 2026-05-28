@@ -25,8 +25,8 @@ nav {
 }
 
 .nav-logo {
-    font-size: 20px; /* スマホでサイト名が入り切るよう少し小さめに */
-    font-weight: 800;
+    font-size: 16px; /* スマホでサイト名が入り切るよう少し小さめに */
+    font-weight: 700;
     letter-spacing: -.5px;
     display: flex;
     align-items: center;
@@ -82,7 +82,7 @@ footer {
     width: 100%;
     box-sizing: border-box;
 }
-/* --- スマホ用ハンバーガーメニュー専用 --- */
+/* --- スマホ用ハンバーガーメニュー --- */
 .menu-toggle {
     display: none; /* PCでは隠す */
     flex-direction: column;
@@ -91,7 +91,9 @@ footer {
     width: 40px;
     height: 40px;
     cursor: pointer;
+    z-index: 1100; /* メニューより上に表示 */
 }
+
 .menu-toggle span {
     display: block;
     width: 26px;
@@ -99,36 +101,47 @@ footer {
     background: var(--black);
     border-radius: 2px;
     transition: 0.3s;
-    margin: 0 auto;
 }
 
 @media (max-width: 680px) {
-    .menu-toggle { display: flex; } /* スマホで表示 */
+    .menu-toggle { display: flex; }
 
+    /* メニュー本体のスタイルを修正 */
     .nav-links {
+        display: flex !important; /* 強制的に表示 */
         position: fixed;
-        top: 64px; /* navの高さ分下げる */
-        right: -100%; /* 隠す */
-        width: 100%;
-        height: calc(100vh - 64px);
+        top: 0;
+        right: -100%; /* 画面の右外に隠す */
+        width: 80%; /* 画面の8割を占める */
+        height: 100vh;
         background: var(--white);
         flex-direction: column;
-        padding: 40px 32px;
+        padding: 80px 32px;
         transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1050;
-        gap: 24px;
-        border-top: 1px solid #eee;
+        border-left: 2px solid var(--black);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
     }
 
-    .nav-links.active { right: 0; }
+    /* JavaScriptでクラスがついた時の動き */
+    .nav-links.active {
+        right: 0 !important; /* 画面内に引き出す */
+    }
+
+    .nav-links li {
+        width: 100%;
+        margin: 0;
+    }
 
     .nav-links a {
-        font-size: 18px !important;
+        font-size: 20px !important;
+        padding: 15px 0;
+        display: block;
         color: var(--black);
-        width: 100%;
+        border-bottom: 1px solid #eee;
     }
 
-    /* 三本線を「×」にする */
+    /* ×印のアニメーション */
     .menu-toggle.is-active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .menu-toggle.is-active span:nth-child(2) { opacity: 0; }
     .menu-toggle.is-active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
