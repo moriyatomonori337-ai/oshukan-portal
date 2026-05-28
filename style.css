@@ -147,54 +147,37 @@ footer {
     .menu-toggle.is-active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 }
 @media (max-width: 680px) {
-  /* --- フッターのスマホ専用修正 --- */
+  /* --- フッター：スマホ専用の決定版デザイン --- */
   footer {
-    padding: 40px 16px !important;
-    height: auto !important; /* 高さを固定せず中身に合わせる */
     background: var(--black) !important;
-    display: block !important; /* flexを解除 */
-  }
-
-  /* フッター内のグリッド（横並び設定）を解除して縦に並べる */
-  footer .footer-grid, 
-  footer .wrapper,
-  footer .container { 
+    padding: 40px 20px !important;
     display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
+    flex-direction: column !important; /* 縦に並べる */
+    align-items: center !important;    /* 中央に寄せる */
     text-align: center !important;
+    height: auto !important;
     gap: 16px !important;
-    width: 100% !important;
   }
 
-  /* 1番目のコラム（ロゴと運営名）以外をすべて消す */
-  footer .footer-column:not(:first-child),
-  footer .footer-nav,
-  footer .footer-links {
-    display: none !important;
-  }
-
-  /* サイト名のロゴを中央に */
+  /* サイト名のスタイル */
   footer .footer-logo {
-    display: flex !important;
-    justify-content: center !important;
-    margin: 0 auto 8px !important;
     font-size: 22px !important;
+    font-weight: 800 !important;
     color: var(--white) !important;
-  }
-
-  /* 「桜修館中等教育学校 自治会広報部 運営」の文字 */
-  footer .footer-column p {
-    display: block !important;
-    font-size: 13px !important;
-    line-height: 1.6 !important;
-    color: rgba(255, 255, 255, 0.8) !important;
     margin: 0 !important;
-    max-width: 280px; /* 横長になりすぎないよう制限 */
+    display: block !important;
   }
 
-  /* コピーライトなどが含まれる下段も不要なら消す、またはシンプルに */
-  footer .footer-bottom {
+  /* 運営組織名のスタイル */
+  footer .footer-sub {
+    font-size: 13px !important;
+    color: rgba(255, 255, 255, 0.7) !important; /* 少し透けさせて上品に */
+    margin-top: 4px !important;
+    display: block !important;
+  }
+
+  /* SNSリンクやメニューなどの「footer-links」を丸ごと隠す */
+  footer .footer-links {
     display: none !important;
   }
 }
