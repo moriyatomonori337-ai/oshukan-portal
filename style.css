@@ -1,202 +1,112 @@
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --pink:#EE7E7E;--pink-lt:#F7BFBF;
-  --teal:#36ACBC;--teal-lt:#83CBEB;
-  --amber:#F1AB56;--amber-lt:#F4E58C;
-  --blue:#005792;--blue-lt:#4E95D9;
-  --black:#1A1A1A;--white:#fff;--bg:#FAFAF8;--muted:#777;
-  --radius:14px;
+/* =========================================
+   基本設定・変数
+========================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --pink: #EE7E7E; --pink-lt: #F7BFBF;
+  --teal: #36ACBC; --teal-lt: #83CBEB;
+  --amber: #F1AB56; --amber-lt: #F4E58C;
+  --blue: #005792; --blue-lt: #4E95D9;
+  --black: #1A1A1A; --white: #fff; --bg: #FAFAF8; --muted: #777;
+  --radius: 14px;
 }
-body{font-family:'M PLUS Rounded 1c',sans-serif;background:var(--bg);color:var(--black);font-size:14px}
+body { font-family: 'M PLUS Rounded 1c', sans-serif; background: var(--bg); color: var(--black); font-size: 14px; display: flex; flex-direction: column; min-height: 100vh; }
+.wrapper { flex: 1; }
 
-nav{background:var(--white);border-bottom:2px solid var(--black);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-/* --- 13行目付近から差し替え開始 --- */
+/* =========================================
+   共通レイアウト（外枠100%・中身1100px）
+========================================= */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  width: 100%;
+}
 
-/* navそのものは単なる土台 */
+/* =========================================
+   ヘッダー (Nav)
+========================================= */
 nav {
-    display: flex !important;
-    justify-content: center !important; 
-    width: 100% !important;
-    height: 64px !important;
+  background: var(--white);
+  border-bottom: 2px solid var(--black);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%; /* 背景は画面いっぱい */
 }
-
-/* 中の container が司令塔 */
-nav .container {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important; /* これで左・中・右に分かれる */
-    width: 100% !important;
-    max-width: 1100px !important;
-    height: 100% !important;
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 左・中・右に分ける */
+  height: 64px;
 }
-/* --- 差し替え終了（この後から @media (max-width: 680px) の設定） --- */
-/* スマホ版での表示切り替え */
-@media (max-width: 680px) {
-    .nav-links {
-        display: none !important; /* スマホでは一旦隠す */
-    }
-    .nav-links.active {
-        display: flex !important; /* ハンバーガーを押したら出す */
-    }
-}
-/* 右：お知らせボタンとハンバーガー */
-.nav-right-group {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-    flex-shrink: 0; /* ボタンが潰れないように */
-}
+.nav-logo { display: flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 800; flex-shrink: 0; color: var(--black); text-decoration: none; }
+.logo-dots { display: flex; gap: 4px; }
+.logo-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--black); }
 
-/* スマホではメニューを隠す（この設定も忘れずに） */
-@media (max-width: 680px) {
-    .nav-links {
-        display: none !important; /* スマホではJSで出すまで隠す */
-        margin: 0 !important;
-    }
-}
+.nav-links { display: flex; list-style: none; gap: 24px; margin: 0; padding: 0; }
+.nav-links a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 700; border-bottom: 2px solid transparent; padding-bottom: 2px; transition: 0.3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--black); border-bottom: 2px solid var(--pink); }
 
-  /* お知らせ登録とハンバーガーの間隔 */
-}
+.nav-right-group { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.nav-cta { background: var(--pink); color: var(--white); border: 2px solid var(--black); border-radius: 999px; padding: 6px 16px; font-size: 12px; font-weight: 800; text-decoration: none; white-space: nowrap; }
 
-.nav-links { display: flex; gap: 24px; list-style: none; }
-.nav-links a { text-decoration: none; color: var(--muted); font-size: 13px; font-weight: 700; }
-.nav-links a.active { color: var(--black); border-bottom: 2px solid var(--pink); }
+/* ハンバーガーメニュー */
+.menu-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; cursor: pointer; z-index: 1100; }
+.menu-toggle span { display: block; width: 26px; height: 3px; background: var(--black); border-radius: 2px; transition: 0.3s; }
 
-.nav-cta {
-    background: var(--pink);
-    color: var(--white);
-    border: 2px solid var(--black);
-    border-radius: 999px;
-    padding: 6px 14px;
-    font-size: 11px;
-    font-weight: 800;
-    cursor: pointer;
-    font-family: inherit;
-    text-decoration: none;
-    white-space: nowrap;
-}
+/* =========================================
+   各セクション・モジュール
+========================================= */
+/* ティッカー (黄色い帯) */
+.ticker-wrapper { width: 100%; background: var(--amber-lt); border-bottom: 2px solid var(--black); border-top: 2px solid var(--black); overflow: hidden; white-space: nowrap; padding: 9px 0; }
+.ticker-inner { display: inline-block; animation: ticker 20s linear infinite; }
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.ticker-item { display: inline-block; margin-right: 48px; font-size: 12px; font-weight: 700; }
+.ticker-bullet { display: inline-block; width: 6px; height: 6px; background: var(--pink); border-radius: 50%; margin-right: 8px; vertical-align: middle; }
 
-body {
-    display: flex;
-    flex-direction: column;
-}
+/* ヒーローセクション */
+.hero { padding: 48px 0 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--pink-lt); border: 2px solid var(--black); border-radius: 999px; padding: 5px 16px; font-size: 12px; font-weight: 800; margin-bottom: 16px; }
+.hero-eyebrow-dot { width: 7px; height: 7px; background: var(--pink); border-radius: 50%; }
+.hero h1 { font-size: 38px; font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+.hero h1 em { font-style: normal; color: var(--pink); }
+.hero-sub { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+.hero-right { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-/* メインコンテンツを囲むクラス。
-   これを付けた要素が、画面の余ったスペースをすべて埋めてくれます */
-.wrapper {
-    flex: 1;
-}
+/* 汎用セクション */
+.section { padding: 0 0 40px 0; }
+.section-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; }
+.section-title { font-size: 14px; font-weight: 800; letter-spacing: .5px; }
+.section-title-bar { display: inline-block; width: 4px; height: 14px; border-radius: 2px; margin-right: 8px; vertical-align: middle; }
 
-footer {
-    background: #2d2d2d; /* 変数を使っているなら var(--black) に変更 */
-    color: #ffffff;
-    padding: 40px;
-    width: 100%;
-    box-sizing: border-box;
-}
-/* --- スマホ用ハンバーガーメニュー --- */
-.menu-toggle {
-    display: none; /* PCでは隠す */
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: 1100; /* メニューより上に表示 */
-}
+/* ニュースカード */
+.news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+.news-card { background: var(--white); border: 2px solid var(--black); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: transform .15s; display: flex; flex-direction: column; text-decoration: none; color: inherit;}
+.news-card:hover { transform: translateY(-3px); }
+.news-card-top { height: 5px; }
+.news-card-body { padding: 14px; flex: 1; }
+.news-tag { font-size: 10px; font-weight: 800; padding: 2px 9px; border-radius: 999px; border: 1.5px solid currentColor; width: fit-content; margin-bottom: 8px; }
+.news-card h3 { font-size: 13px; font-weight: 700; line-height: 1.45; margin-bottom: 6px; }
+.news-meta { font-size: 11px; color: var(--muted); }
 
-.menu-toggle span {
-    display: block;
-    width: 26px;
-    height: 3px;
-    background: var(--black);
-    border-radius: 2px;
-    transition: 0.3s;
-}
+/* 3列機能カード（広報部・コンテンツ） */
+.feature-grid, .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 
-@media (max-width: 680px) {
-    .menu-toggle { display: flex; }
+/* =========================================
+   フッター
+========================================= */
+footer { width: 100%; background: var(--black); color: var(--white); padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.footer-logo { font-size: 14px; font-weight: 800; }
+.footer-sub { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 3px; }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { color: rgba(255,255,255,0.6); font-size: 12px; font-weight: 700; text-decoration: none; }
 
-    /* メニュー本体のスタイルを修正 */
-    .nav-links {
-        display: flex !important; /* 強制的に表示 */
-        position: fixed;
-        top: 0;
-        right: -100%; /* 画面の右外に隠す */
-        width: 80%; /* 画面の8割を占める */
-        height: 100vh;
-        background: var(--white);
-        flex-direction: column;
-        padding: 80px 32px;
-        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1050;
-        border-left: 2px solid var(--black);
-        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
-    }
-
-    /* JavaScriptでクラスがついた時の動き */
-    .nav-links.active {
-        right: 0 !important; /* 画面内に引き出す */
-    }
-
-    .nav-links li {
-        width: 100%;
-        margin: 0;
-    }
-
-/* 78行目付近から差し替え */
-    .nav-links a {
-        font-size: 20px !important;
-        padding: 10px 0;
-        display: inline-block; /* 下線を文字幅に合わせるため */
-        color: var(--black);
-        border-bottom: 2px solid #eee; /* スマホではより薄い灰色 */
-        width: fit-content;
-        margin-bottom: 10px;
-    }
-
-    .nav-links a.active {
-        border-bottom: 2px solid var(--pink) !important;
-    }
-    /* ×印のアニメーション */
-    .menu-toggle.is-active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .menu-toggle.is-active span:nth-child(2) { opacity: 0; }
-    .menu-toggle.is-active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-}
-@media (max-width: 680px) {
-  /* --- フッター：スマホ専用の決定版デザイン --- */
-  footer {
-    background: var(--black) !important;
-    padding: 40px 20px !important;
-    display: flex !important;
-    flex-direction: column !important; /* 縦に並べる */
-    align-items: center !important;    /* 中央に寄せる */
-    text-align: center !important;
-    height: auto !important;
-    gap: 16px !important;
-  }
-
-  /* サイト名のスタイル */
-  footer .footer-logo {
-    font-size: 22px !important;
-    font-weight: 800 !important;
-    color: var(--white) !important;
-    margin: 0 !important;
-    display: block !important;
-  }
-
-  /* 運営組織名のスタイル */
-  footer .footer-sub {
-    font-size: 13px !important;
-    color: rgba(255, 255, 255, 0.7) !important; /* 少し透けさせて上品に */
-    margin-top: 4px !important;
-    display: block !important;
-  }
-
-  /* SNSリンクやメニューなどの「footer-links」を丸ごと隠す */
-  footer .footer-links {
-    display: none !important;
-  }
-}
+/* =========================================
+   スマホ対応
+========================================= */
+@media (max-width: 768px) {
+  .nav-inner { padding: 0 16px; }
+  .menu-toggle { display: flex; }
+  .nav-links { display: flex !important; position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; background: var(--white); flex-direction: column; padding: 80px 32px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1050; border-left: 2px solid var(--black); }
+  .nav-links
