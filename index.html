@@ -94,24 +94,41 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
 .footer-links a{color:rgba(255,255,255,.6);font-size:12px;font-weight:700;text-decoration:none}
 
 @media(max-width:680px) {
-  /* --- ヒーローエリアのキャッチコピーを大きくする --- */
-  .hero h1 {
-    font-size: 36px !important; /* 今より一回り大きく（元の26pxからアップ） */
-    line-height: 1.2;
-    margin-bottom: 12px;
-    letter-spacing: -1px; /* 少し字間を詰めるとカッコよくなります */
+  /* ヒーローエリア全体の調整 */
+  .hero {
+    padding: 40px 20px !important; /* 上下の余白を確保 */
+    grid-template-columns: 1fr !important; /* 縦並びを強制 */
+    text-align: left; /* 左寄せで読みやすく */
   }
 
-  /* サブテキスト（説明文）も読みやすく調整 */
+  /* キャッチコピーの修正 */
+  .hero h1 {
+    font-size: 32px !important; /* 36pxだと大きすぎたので32pxに微調整 */
+    line-height: 1.3 !important; /* 行間を広げて重なりを防止 */
+    margin-bottom: 16px !important;
+    word-wrap: break-word; /* 長い単語を折り返す */
+    overflow-wrap: break-word;
+    display: block; /* 確実にブロック要素として扱う */
+  }
+
+  /* 説明文の修正 */
   .hero p {
     font-size: 15px !important;
     line-height: 1.6;
     margin-bottom: 24px;
+    padding-right: 10px; /* 右側に少し遊びを作る */
   }
 
-  /* ヒーローエリア全体の余白を広げて「ドーン」と見せる */
-  .hero {
-    padding: 48px 20px 32px !important; 
+  /* 右側の統計カードが重ならないようにする */
+  .hero-right {
+    grid-template-columns: 1fr !important;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  /* ニュースカードもスマホでは1列に */
+  .news-scroll {
+    grid-template-columns: 1fr !important;
   }
 }
 </style>
