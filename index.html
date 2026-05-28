@@ -155,6 +155,26 @@ footer{background:var(--black);color:var(--white);padding:24px 32px;display:flex
     gap: 16px;
   }
 }
+@media(max-width:680px) {
+  /* --- 既存の設定の下に追加してください --- */
+
+  /* 1. コンテンツ（行事・部活など）のグリッドを縦1列にする */
+  .feature-grid {
+    grid-template-columns: 1fr !important; /* 強制的に1列 */
+    gap: 16px;
+  }
+
+  /* 2. 広報部の三本柱を縦1列にする */
+  .pillars-grid {
+    grid-template-columns: 1fr !important; /* 強制的に1列 */
+    gap: 20px;
+  }
+
+  /* ついでに各カードの中の文字も見やすく調整 */
+  .pillar-card, .feature-card {
+    padding: 24px !important;
+  }
+}
 </style>
 </head>
 <script>
