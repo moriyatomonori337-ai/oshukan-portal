@@ -11,49 +11,55 @@ body{font-family:'M PLUS Rounded 1c',sans-serif;background:var(--bg);color:var(-
 
 nav{background:var(--white);border-bottom:2px solid var(--black);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 /* --- ナビゲーション全体の調整 --- */
-/* 29行目付近から差し替え */
-/* --- 14行目付近からの nav 設定を上書き --- */
+/* --- 14行目付近からの nav / logo 設定を上書き --- */
 nav {
     background: var(--white);
     border-bottom: 2px solid var(--black);
-    padding: 0 16px !important; /* 左右の余白を16pxに固定 */
-    height: 64px !important;    /* 高さを64pxに固定 */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 0 16px !important;
+    height: 64px !important;
+    display: flex !important;
+    flex-direction: row !important; /* 強制的に横並び */
+    align-items: center !important;
+    justify-content: space-between !important; /* 左と右に分ける */
     position: sticky;
     top: 0;
     z-index: 1000;
     box-sizing: border-box;
 }
 
+/* ロゴエリアの設定 */
 .nav-logo {
-    font-size: 20px !important; /* 文字サイズを20pxに固定 */
+    display: flex !important;
+    flex-direction: row !important; /* ドットと文字を横に並べる */
+    align-items: center !important;
+    gap: 10px !important;
+    font-size: 20px !important;
     font-weight: 800;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    white-space: nowrap;
-    margin: 0 !important;      /* 余計な余白を消す */
+    margin: 0 !important;
 }
 
-/* ロゴのドットのサイズも固定 */
+/* ドットを横に並べる */
+.logo-dots {
+    display: flex !important;
+    flex-direction: row !important; /* これが縦並びを防ぎます */
+    gap: 4px !important;
+}
+
 .logo-dot {
     width: 10px !important;
     height: 10px !important;
     border-radius: 50%;
     border: 1.5px solid var(--black);
-}
-.nav-links a.active { 
-    color: var(--black) !important; 
-    border-bottom: 2px solid var(--pink) !important; /* アクティブ時はピンク */
+    flex-shrink: 0; /* 潰れないように固定 */
 }
 
-/* 右側のボタンを横並びにするグループ */
+/* 右側のグループ（ボタンとハンバーガー）を右端に固定 */
 .nav-right-group {
-    display: flex;
-    align-items: center;
-    gap: 10px; 
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-left: auto !important; /* 左側に隙間を作って右へ押し出す */
+}
 
   /* お知らせ登録とハンバーガーの間隔 */
 }
