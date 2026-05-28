@@ -11,54 +11,58 @@ body{font-family:'M PLUS Rounded 1c',sans-serif;background:var(--bg);color:var(-
 
 nav{background:var(--white);border-bottom:2px solid var(--black);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 /* --- ナビゲーション全体の調整 --- */
-/* --- 14行目付近からの nav / logo 設定を上書き --- */
 nav {
     background: var(--white);
     border-bottom: 2px solid var(--black);
-    padding: 0 16px !important;
+    padding: 0 24px !important; /* 少し余裕を持たせる */
     height: 64px !important;
     display: flex !important;
-    flex-direction: row !important; /* 強制的に横並び */
     align-items: center !important;
-    justify-content: space-between !important; /* 左と右に分ける */
+    justify-content: space-between !important; 
     position: sticky;
     top: 0;
     z-index: 1000;
     box-sizing: border-box;
 }
 
-/* ロゴエリアの設定 */
+/* 左：ロゴエリア */
 .nav-logo {
     display: flex !important;
-    flex-direction: row !important; /* ドットと文字を横に並べる */
     align-items: center !important;
     gap: 10px !important;
     font-size: 20px !important;
     font-weight: 800;
-    margin: 0 !important;
+    flex-shrink: 0; /* ロゴが潰れないように */
 }
 
-/* ドットを横に並べる */
 .logo-dots {
     display: flex !important;
-    flex-direction: row !important; /* これが縦並びを防ぎます */
     gap: 4px !important;
 }
 
-.logo-dot {
-    width: 10px !important;
-    height: 10px !important;
-    border-radius: 50%;
-    border: 1.5px solid var(--black);
-    flex-shrink: 0; /* 潰れないように固定 */
+/* 中央：メニューリンク（ここを復活させる） */
+.nav-links {
+    display: flex !important;
+    list-style: none !important;
+    gap: 24px !important; /* リンク同士の間隔 */
+    margin: 0 auto !important; /* これで中央に配置 */
+    padding: 0 !important;
 }
 
-/* 右側のグループ（ボタンとハンバーガー）を右端に固定 */
+/* 右：お知らせボタンとハンバーガー */
 .nav-right-group {
     display: flex !important;
     align-items: center !important;
     gap: 12px !important;
-    margin-left: auto !important; /* 左側に隙間を作って右へ押し出す */
+    flex-shrink: 0; /* ボタンが潰れないように */
+}
+
+/* スマホではメニューを隠す（この設定も忘れずに） */
+@media (max-width: 680px) {
+    .nav-links {
+        display: none !important; /* スマホではJSで出すまで隠す */
+        margin: 0 !important;
+    }
 }
 
   /* お知らせ登録とハンバーガーの間隔 */
