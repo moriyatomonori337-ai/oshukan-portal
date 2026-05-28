@@ -10,19 +10,27 @@
 body{font-family:'M PLUS Rounded 1c',sans-serif;background:var(--bg);color:var(--black);font-size:14px}
 
 nav{background:var(--white);border-bottom:2px solid var(--black);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-/* --- コンテンツの横幅を一括制限する設定 --- */
-.container, 
-.wrapper, 
-main {
-    max-width: 1100px;  /* ニュースページと同じくらいの「最大幅」を指定 */
-    margin: 0 auto;    /* 左右中央に寄せる */
-    padding: 0 24px;   /* スマホや画面が狭い時の左右の余白 */
-    width: 100%;       /* 基本は100%幅 */
+/* --- 1. ヘッダーとフッターは「画面いっぱい」を維持 --- */
+nav, 
+footer {
+    width: 100% !important;
+    max-width: none !important; /* 幅の制限を解除 */
+    margin: 0 !important;
     box-sizing: border-box;
 }
 
-/* もし各ページのメイン部分が <section> で始まっているならこれも追加 */
-section {
+/* --- 2. メインコンテンツの「中身」だけを絞る共通クラス --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* --- 3. index.htmlの各セクションも中身を絞る --- */
+section, 
+main {
     max-width: 1100px;
     margin: 0 auto;
     padding: 40px 24px;
