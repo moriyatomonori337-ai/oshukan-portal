@@ -218,265 +218,66 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <body>
 <div class="wrapper">
-<nav>
-  <div class="container"><div class="nav-logo">
-    <div class="logo-dots">
-      <div class="logo-dot" style="background:var(--pink)"></div>
-      <div class="logo-dot" style="background:var(--teal)"></div>
-      <div class="logo-dot" style="background:var(--amber)"></div>
-    </div>
-    <a href="index.html" style="text-decoration: none; color: inherit;">Oshukan Portal</a>
-  </div>
-
-  <div class="nav-right-group">
-    <a href="index.html" class="nav-cta">お知らせ登録</a>
-    <div class="menu-toggle" id="mobile-menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-
-  <ul class="nav-links">
-    <li><a href="oshukan_news_list.html">ニュース</a></li>
-    <li><a href="oshukan_events_page.html">行事</a></li>
-    <li><a href="oshukan_clubs_page.html">部活</a></li>
-    <li><a href="oshukan_talks_page.html">講演</a></li>
-    <li><a href="oshukan_about_page.html">広報部</a></li>
-  </ul>
-  </div>
-</nav>
-
-<div class="ticker">
-  <span class="ticker-inner">
-    <span class="ticker-item"><span class="ticker-bullet"></span>🎉 記念祭まであと22日！テーマは「RPG」</span>
-    <span class="ticker-item"><span class="ticker-bullet"></span>📣 広報部1期生 始動しました</span>
-    <span class="ticker-item"><span class="ticker-bullet"></span>🏆 サッカー部 県大会ベスト8進出おめでとう！</span>
-    <span class="ticker-item"><span class="ticker-bullet"></span>📚 今週の講師リクエストアンケート受付中</span>
-    <span class="ticker-item"><span class="ticker-bullet"></span>🎉 記念祭まであと22日！テーマは「RPG」</span>
-    <span class="ticker-item"><span class="ticker-bullet"></span>📣 広報部1期生 始動しました</span>
-    <span class="ticker-item"><span class="ticker-bullet"></span>🏆 サッカー部 県大会ベスト8進出おめでとう！</span>
-    <span class="ticker-item"><span class="ticker-bullet"></span>📚 今週の講師リクエストアンケート受付中</span>
-  </span>
-</div>
   
-<div class="container">
-<div class="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow"><div class="hero-eyebrow-dot"></div>生徒会広報部 1期生 運営</div>
-    <h1>桜修館の<em>いま</em>を、<br>もっと面白く。</h1>
-    <p class="hero-sub">「自由と自治」を掲げる桜修館のリアルを発信する、生徒のための情報ポータル。ニュース・行事・部活・講演をここで全部チェック。</p>
-    <div class="hero-btns">
-　　<a href="oshukan_news_list.html" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">     
-    </a>
-    <a href="oshukan_events_page.html" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">    
-    </a>
-    </div>
-  </div>
-<div class="hero-right" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; align-items: start;">
-    <div class="hero-stat" style="background: var(--pink); border: 2px solid var(--black); border-radius: var(--radius); padding:34px 16px; text-align: center; display: flex; flex-direction: column; justify-content: center; box-shadow: 4px 4px 0px var(--black);">
-        <div class="hero-stat-num" id="festival-days" style="color: var(--white); font-size: 36px; font-weight: 800; text-shadow: 2px 2px 0px rgba(0,0,0,0.2);">--</div>
-        <div class="hero-stat-label" id="festival-label" style="color: var(--white); font-size: 11px; font-weight: 700; margin-top: 4px;">記念祭まであと（日）</div>
-    </div>
-
-    <div style="display: grid; grid-template-rows: repeat(3, 1fr); gap: 10px;">
-        <div class="hero-stat" style="background: var(--white); border: 2px solid var(--black); border-radius: var(--radius); padding: 8px 12px; display: flex; align-items: center; justify-content: space-between;">
-            <div class="hero-stat-label" style="color: var(--black);font-size: 12px; font-weight: 700;">新着記事</div>
-            <div class="hero-stat-num" id="news-count" style="color:var(--teal); font-size: 18px; font-weight: 800;">--</div>
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-dots">
+          <div class="logo-dot" style="background:var(--pink)"></div>
+          <div class="logo-dot" style="background:var(--teal)"></div>
+          <div class="logo-dot" style="background:var(--amber)"></div>
         </div>
+        Oshukan Portal
+      </a>
 
-        <div class="hero-stat" style="background: var(--white); border: 2px solid var(--black); border-radius: var(--radius); padding: 8px 12px; display: flex; align-items: center; justify-content: space-between;">
-            <div class="hero-stat-label" style="color: var(--black);font-size: 12px; font-weight: 700;">部活紹介</div>
-            <div class="hero-stat-num" id="club-count" style="color:var(--amber); font-size: 18px; font-weight: 800;">--</div>
+      <ul class="nav-links">
+        <li><a href="oshukan_news_list.html">ニュース</a></li>
+        <li><a href="oshukan_events_page.html">行事</a></li>
+        <li><a href="oshukan_clubs_page.html">部活</a></li>
+        <li><a href="oshukan_talks_page.html">講演</a></li>
+        <li><a href="oshukan_about_page.html">広報部</a></li>
+      </ul>
+
+      <div class="nav-right-group">
+        <a href="#" class="nav-cta">お知らせ登録</a>
+        <div class="menu-toggle" id="mobile-menu">
+          <span></span><span></span><span></span>
         </div>
-
-        <div class="hero-stat" style="background: var(--white); border: 2px solid var(--black); border-radius: var(--radius); padding: 8px 12px; display: flex; align-items: center; justify-content: space-between;">
-            <div class="hero-stat-label" style="color: var(--black);font-size: 12px; font-weight: 700;">講 演</div>
-            <div class="hero-stat-num" id="talk-count" style="color:var(--blue); font-size: 18px; font-weight: 800;">--</div>
-        </div>
-    </div>
-
-    <div id="festival-special-area" style="display: none; grid-column: span 2; margin-top: 5px; padding: 12px; background: var(--pink-lt); border: 2px solid var(--black); border-radius: var(--radius); text-align: center; box-shadow: 3px 3px 0px var(--black);">
-        <h3 style="color: var(--pink); font-size: 13px; margin-bottom: 5px; font-weight: 800;">✨ 記念祭 特設サイト公開中！ ✨</h3>
-        <a href="https://example.com" class="btn-primary" style="text-decoration: none; font-size: 11px; padding: 5px 12px; display: inline-block;">特設サイトへ 🚀</a>
-    </div>
-</div>
-
-    <div id="festival-special-area" style="display: none; margin-top: 10px; padding: 15px; background: var(--pink-lt); border: 2px solid var(--pink); border-radius: var(--radius); text-align: center;">
-        <h3 style="color: var(--pink); font-size: 14px; margin-bottom: 5px;">✨ 記念祭 特設サイト公開中！ ✨</h3>
-        <a href="https://example.com" class="btn-primary" style="text-decoration: none; font-size: 12px; padding: 5px 10px;">特設サイトへ 🚀</a>
-    </div>
-</div>
-
-<div class="section">
-  <div class="section-head">
-    <div class="section-title"><span class="section-title-bar" style="background:var(--pink)"></span>最新ニュース</div>
-　　<a href="oshukan_news_list.html" style="text-decoration: none; color: inherit;"></a>
-  </div>
-  <div class="news-scroll">
-    
-    <div class="news-card">
-    <a href="oshukan_news_list.html" style="text-decoration: none; color: inherit;">
-      <div class="news-card-top" style="background:var(--pink)"></div>
-      <div class="news-card-body">
-        <div class="news-tag" style="color:var(--pink)">行事</div>
-        <h3>記念祭テーマ「RPG」決定！各クラスの出し物も発表</h3>
-        <div class="news-meta">2日前 · 生徒会</div>
       </div>
-    </a>
     </div>
-    
-    <div class="news-card">
-    <a href="oshukan_news_list.html" style="text-decoration: none; color: inherit;">
-      <div class="news-card-top" style="background:var(--teal)"></div>
-      <div class="news-card-body">
-        <div class="news-tag" style="color:var(--teal)">講演</div>
-        <h3>第1回講師リクエスト、集計結果を公開します</h3>
-        <div class="news-meta">3日前 · 広報部</div>
-      </div>
-    </a>
-    </div>
-    
-    <div class="news-card">
-    <a href="oshukan_news_list.html" style="text-decoration: none; color: inherit;"> 
-      <div class="news-card-top" style="background:var(--blue)"></div>
-      <div class="news-card-body">
-        <div class="news-tag" style="color:var(--blue)">部活</div>
-        <h3>サッカー部 県大会ベスト8！キャプテンに直撃インタビュー</h3>
-        <div class="news-meta">4日前 · 広報部</div>
-      </div>
-    </a>
-    </div>
-    
-    <div class="news-card">
-    <a href="oshukan_news_list.html" style="text-decoration: none; color: inherit;">
-      <div class="news-card-top" style="background:var(--amber)"></div>
-      <div class="news-card-body">
-        <div class="news-tag" style="color:var(--amber)">異能発掘</div>
-        <h3>在校生インタビュー：AIでオリジナル楽曲をつくる2年生</h3>
-        <div class="news-meta">5日前 · 広報部</div>
-      </div>
-    </a>
-    </div>
-    
-    <div class="news-card">
-    <a href="oshukan_news_list.html" style="text-decoration: none; color: inherit;">
-      <div class="news-card-top" style="background:var(--pink-lt)" style="background:var(--pink)"></div>
-      <div class="news-card-body">
-        <div class="news-tag" style="color:var(--teal)">自治</div>
-        <h3>自治会6月議会、主な議題と決定事項まとめ</h3>
-        <div class="news-meta">1週間前 · 広報部</div>
-      </div>
-    </a>
-    </div>
+  </nav>
 
-<a href="oshukan_news_list.html" style="text-decoration: none; color: inherit;">
-    <div class="news-card" style="height: 100%; display: flex; align-items: center; justify-content: center; background: var(--white); border-style: dashed; border-color: var(--muted);">
-        <div class="news-card-body" style="text-align: center;">
-            <div style="font-size: 24px; margin-bottom: 8px;">📂</div>
-            <h3 style="margin: 0; color: var(--muted);">すべてのニュースを<br>見る →</h3>
-        </div>
-    </div>
-</a>
-    
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-head">
-    <div class="section-title"><span class="section-title-bar" style="background:var(--teal)"></span>コンテンツ</div>
-  </div>
-  <div class="feature-grid">
-    <a href="oshukan_clubs_page.html" style="text-decoration: none; color: inherit;">
-    <div class="feature-card">
-      <div class="feature-icon-wrap" style="background:var(--pink-lt)">🏫</div>
-      <h3>部活紹介</h3>
-      <p>先輩の本音レビュー付き。雰囲気・きつさ・楽しさをリアルに掲載。</p>
-      <div class="feature-arrow">くわしく見る →</div>
-    </div>
-    </a>
-    <a href="oshukan_talks_page.html" style="text-decoration: none; color: inherit;">
-    <div class="feature-card">
-      <div class="feature-icon-wrap" style="background:var(--teal-lt)">🎤</div>
-      <h3>講演アーカイブ</h3>
-      <p>招致講師の「一番熱い一言」を動画でアーカイブ。いつでも見返せる。</p>
-      <div class="feature-arrow">動画を見る →</div>
-    </div>
-    </a>
-    <a href="oshukan_news_list.html" style="text-decoration: none; color: inherit;">
-    <div class="feature-card">
-      <div class="feature-icon-wrap" style="background:var(--amber-lt)">✨</div>
-      <h3>異能発掘インタビュー</h3>
-      <p>学内の隠れた才能に光を当てる連載。「この学校にはすごい奴がいる」。</p>
-      <div class="feature-arrow">読んでみる →</div>
-    </div>
-    </a>
-    <a href="oshukan_events_page.html" style="text-decoration: none; color: inherit;">
-    <div class="feature-card">
-      <div class="feature-icon-wrap" style="background:#E6F1FB">📅</div>
-      <h3>行事カレンダー</h3>
-      <p>テスト・文化祭・体育祭・各行事の予定を一覧で。見逃しゼロへ。</p>
-      <div class="feature-arrow">カレンダーを見る →</div>
-    </div>
-    </a>
-    <a href="oshukan_about_page.html" style="text-decoration: none; color: inherit;">
-    <div class="feature-card">
-      <div class="feature-icon-wrap" style="background:var(--pink-lt)">🗳️</div>
-      <h3>自治会ダイジェスト</h3>
-      <p>議会の動きを30秒で読めるかたちに。自治の当事者になろう。</p>
-      <div class="feature-arrow">今月のまとめ →</div>
-    </div>
-    </a>
-    <a href="oshukan_news_list.html" style="text-decoration: none; color: inherit;">
-    <div class="feature-card">
-      <div class="feature-icon-wrap" style="background:var(--teal-lt)">🛠️</div>
-      <h3>スキルシェア</h3>
-      <p>AI活用・iPad術・動画編集。広報部から全校へ還元するノウハウ集。</p>
-      <div class="feature-arrow">スキルを学ぶ →</div>
-    </div>
-    </a>
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-head">
-    <div class="section-title"><span class="section-title-bar" style="background:var(--pink)"></span>広報部の3本柱</div>
-    <a href="oshukan_about_page.html" class="see-all">詳しく見る →</a>
-　</div>
-  <div class="pillars-grid">
-    <div class="pillar-card" style="background:var(--pink-lt)">
-      <span class="pillar-badge" style="background:var(--pink);color:#fff">① プロデュース</span>
-      <h3>「知」を呼び込む</h3>
-      <p>生徒リサーチで「今一番会いたい人」を招致。講演の名言をショート動画でアーカイブ配信。卒業生・プロとゆるく話せる場を創出する。</p>
-    </div>
-    <div class="pillar-card" style="background:var(--teal-lt)">
-      <span class="pillar-badge" style="background:var(--teal);color:#fff">② 発信</span>
-      <h3>「学校の正体」を可視化</h3>
-      <p>日常・自治の議論・葛藤をショート動画でリアルに発信。隠れた才能を発掘するインタビュー記事でポータルを盛り上げる。</p>
-    </div>
-    <div class="pillar-card" style="background:var(--amber-lt)">
-      <span class="pillar-badge" style="background:var(--amber);color:#fff">③ 教育・支援</span>
-      <h3>学校生活をアップデート</h3>
-      <p>AI活用術・iPad術・動画編集ワークショップを広報部から全校へ還元。スキルシェアで生活の質を上げる。</p>
+  <div class="ticker-wrapper">
+    <div class="ticker-inner">
+      <span class="ticker-item"><span class="ticker-bullet"></span>🎉 記念祭まであと22日！テーマは「RPG」</span>
+      <span class="ticker-item"><span class="ticker-bullet"></span>📣 広報部1期生 始動しました</span>
+      <span class="ticker-item"><span class="ticker-bullet"></span>🏆 サッカー部 県大会ベスト8進出おめでとう！</span>
     </div>
   </div>
+
+  <main class="container">
+    
+    <div class="hero">
+      </div>
+
+    <div class="section">
+      </div>
+
+  </main>
 </div>
-</div>
-  
+
 <footer>
   <div>
     <div class="footer-logo">Oshukan Portal</div>
     <div class="footer-sub">桜修館中等教育学校 自治会広報部 運営</div>
   </div>
   <div class="footer-links">
-    ここに桜修館の公式SNSなどの外部リンクを乗せる予定。
     <a href="#">ニュース</a>
     <a href="#">行事</a>
     <a href="#">部活</a>
-    <a href="#">広報部について</a>
+    <a href="#">広報部</a>
   </div>
 </footer>
-
 </body>
 <script>
         function updateStats() {
