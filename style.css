@@ -10,54 +10,51 @@
 body{font-family:'M PLUS Rounded 1c',sans-serif;background:var(--bg);color:var(--black);font-size:14px}
 
 nav{background:var(--white);border-bottom:2px solid var(--black);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-/* --- 1. 背景（nav, footer, body）は画面いっぱい --- */
+/* --- 13行目付近から差し替え開始 --- */
+
+/* 1. 背景・外枠の基本設定 */
 body, nav, footer {
     width: 100% !important;
     max-width: none !important;
     margin: 0 !important;
 }
 
-/* --- 2. 中身を絞り込むための「共通の箱」を作る --- */
+/* 2. 中身を中央に寄せる共通クラス */
 .container {
-    max-width: 1100px !important; /* ここで読みやすい幅に制限 */
-    margin: 0 auto !important;    /* 左右中央に寄せる */
-    padding: 40px 24px !important; /* 上下の余白(40px)と左右の余白(24px) */
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    padding: 0 24px !important; /* paddingは各セクションで調整できるよう、ここでは左右のみ */
     width: 100% !important;
     box-sizing: border-box;
 }
 
-/* --- 3. ナビゲーションの中身も中央に寄せる --- */
-.nav-inner {
-    max-width: 1100px !important;
-    margin: 0 auto !important;
-    width: 100% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-}
-/* --- ナビゲーション全体の固定ルール --- */
+/* 3. ナビゲーション（PC・スマホ共通の土台） */
 nav {
     background: var(--white);
     border-bottom: 2px solid var(--black);
-    padding: 0 24px !important;
     height: 64px !important;
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
     position: sticky;
     top: 0;
     z-index: 1000;
-    width: 100% !important;
-    max-width: none !important; /* ここは画面端まで広げる */
+    display: flex !important;
+    justify-content: center !important; /* 中のcontainerを中央に */
 }
 
-/* 1. 左側：ロゴエリア（ドットと文字をセットにする） */
-.nav-logo {
+/* ナビの中のcontainerに「左・中・右」の命令を出す */
+nav .container {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    gap: 12px !important; /* ドットと文字の間隔 */
+    justify-content: space-between !important; /* これで三方に分かれる */
+    height: 100% !important;
+    padding: 0 24px !important; /* 左右余白 */
+}
+
+/* 左：ロゴエリア */
+.nav-logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
     font-size: 20px !important;
     font-weight: 800;
     flex-shrink: 0;
@@ -65,12 +62,9 @@ nav {
     color: var(--black);
 }
 
-/* ドットの並びを横に強制 */
 .logo-dots {
     display: flex !important;
-    flex-direction: row !important;
     gap: 4px !important;
-    align-items: center !important;
 }
 
 .logo-dot {
@@ -79,19 +73,32 @@ nav {
     border-radius: 50%;
     border: 1.5px solid var(--black);
     flex-shrink: 0;
-    display: block !important; /* 消えないように強制 */
 }
 
-/* 2. 中央：メニュー（PCでのみ表示し、中央に寄せる） */
+/* 中央：メニューリンク（PC用） */
 .nav-links {
     display: flex !important;
     list-style: none !important;
     gap: 24px !important;
-    margin: 0 auto !important; /* 左右をautoにすることで中央へ */
+    margin: 0 !important;
     padding: 0 !important;
 }
 
-/* 3. 右側：ボタングループ */
+.nav-links a {
+    text-decoration: none;
+    color: var(--black);
+    font-size: 13px;
+    font-weight: 700;
+    border-bottom: 2px solid #ddd; /* 基本は灰色 */
+    padding-bottom: 2px;
+    transition: 0.3s;
+}
+
+.nav-links a.active {
+    border-bottom: 2px solid var(--pink) !important; /* アクティブ時はピンク */
+}
+
+/* 右：ボタングループ */
 .nav-right-group {
     display: flex !important;
     align-items: center !important;
@@ -99,6 +106,19 @@ nav {
     flex-shrink: 0;
 }
 
+.nav-cta {
+    background: var(--pink);
+    color: var(--white);
+    border: 2px solid var(--black);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* --- 差し替え終了（この後から @media (max-width: 680px) の設定） --- */
 /* スマホ版での表示切り替え */
 @media (max-width: 680px) {
     .nav-links {
